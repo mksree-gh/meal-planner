@@ -1,0 +1,3101 @@
+[
+  {
+    "recipe_id": "rec_001",
+    "name": "Paneer Butter Masala",
+    "main_ingredients": [
+      "paneer",
+      "tomato",
+      "cream"
+    ],
+    "tags": [
+      "vegetarian",
+      "gluten_free",
+      "comfort_food"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 25,
+    "nutrition_facts": {
+      "protein": 15,
+      "carbs": 18,
+      "fat": 22,
+      "calories": 340
+    },
+    "cuisine": "Indian",
+    "cooking_style": "sauteed",
+    "flavor_profile": [
+      "rich",
+      "creamy",
+      "savory"
+    ],
+    "description": "Paneer Butter Masala — a indian dish cooked in sauteed style with flavors that are rich, creamy, savory.",
+    "popularity_score": 0.95,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_002",
+    "name": "Dal Tadka",
+    "main_ingredients": [
+      "lentils",
+      "ghee",
+      "spices"
+    ],
+    "tags": [
+      "vegetarian",
+      "gluten_free",
+      "family_favorite"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 35,
+    "nutrition_facts": {
+      "protein": 12,
+      "carbs": 30,
+      "fat": 10,
+      "calories": 260
+    },
+    "cuisine": "Indian",
+    "cooking_style": "boiled",
+    "flavor_profile": [
+      "spicy",
+      "comforting"
+    ],
+    "description": "Dal Tadka — a indian dish cooked in boiled style with flavors that are spicy, comforting.",
+    "popularity_score": 0.92,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_003",
+    "name": "Rajma Chawal",
+    "main_ingredients": [
+      "kidney beans",
+      "rice",
+      "onion"
+    ],
+    "tags": [
+      "vegan",
+      "gluten_free",
+      "hearty"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 45,
+    "nutrition_facts": {
+      "protein": 18,
+      "carbs": 75,
+      "fat": 8,
+      "calories": 444
+    },
+    "cuisine": "Indian",
+    "cooking_style": "slow_cooked",
+    "flavor_profile": [
+      "spicy",
+      "hearty"
+    ],
+    "description": "Rajma Chawal — a indian dish cooked in slow_cooked style with flavors that are spicy, hearty.",
+    "popularity_score": 0.88,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_004",
+    "name": "Aloo Gobi",
+    "main_ingredients": [
+      "potato",
+      "cauliflower",
+      "turmeric"
+    ],
+    "tags": [
+      "vegan",
+      "gluten_free",
+      "dairy_free"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 30,
+    "nutrition_facts": {
+      "protein": 5,
+      "carbs": 25,
+      "fat": 12,
+      "calories": 228
+    },
+    "cuisine": "Indian",
+    "cooking_style": "sauteed",
+    "flavor_profile": [
+      "mild",
+      "savory"
+    ],
+    "description": "Aloo Gobi — a indian dish cooked in sauteed style with flavors that are mild, savory.",
+    "popularity_score": 0.85,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_005",
+    "name": "Butter Chicken",
+    "main_ingredients": [
+      "chicken",
+      "butter",
+      "tomato"
+    ],
+    "tags": [
+      "comfort_food",
+      "family_favorite"
+    ],
+    "prep_time_min": 25,
+    "cook_time_min": 35,
+    "nutrition_facts": {
+      "protein": 30,
+      "carbs": 15,
+      "fat": 25,
+      "calories": 405
+    },
+    "cuisine": "Indian",
+    "cooking_style": "roasted",
+    "flavor_profile": [
+      "rich",
+      "creamy",
+      "smoky"
+    ],
+    "description": "Butter Chicken — a indian dish cooked in roasted style with flavors that are rich, creamy, smoky.",
+    "popularity_score": 0.98,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_006",
+    "name": "Palak Paneer",
+    "main_ingredients": [
+      "spinach",
+      "paneer",
+      "cream"
+    ],
+    "tags": [
+      "vegetarian",
+      "gluten_free",
+      "low_carb"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 25,
+    "nutrition_facts": {
+      "protein": 14,
+      "carbs": 10,
+      "fat": 20,
+      "calories": 276
+    },
+    "cuisine": "Indian",
+    "cooking_style": "sauteed",
+    "flavor_profile": [
+      "mild",
+      "creamy",
+      "healthy"
+    ],
+    "description": "Palak Paneer — a indian dish cooked in sauteed style with flavors that are mild, creamy, healthy.",
+    "popularity_score": 0.91,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_007",
+    "name": "Chicken Biryani",
+    "main_ingredients": [
+      "chicken",
+      "rice",
+      "spices"
+    ],
+    "tags": [
+      "family_favorite"
+    ],
+    "prep_time_min": 30,
+    "cook_time_min": 50,
+    "nutrition_facts": {
+      "protein": 28,
+      "carbs": 60,
+      "fat": 18,
+      "calories": 514
+    },
+    "cuisine": "Indian",
+    "cooking_style": "layered",
+    "flavor_profile": [
+      "spicy",
+      "aromatic",
+      "rich"
+    ],
+    "description": "Chicken Biryani — a indian dish cooked in layered style with flavors that are spicy, aromatic, rich.",
+    "popularity_score": 0.97,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_008",
+    "name": "Pav Bhaji",
+    "main_ingredients": [
+      "mixed vegetables",
+      "potato",
+      "bread roll"
+    ],
+    "tags": [
+      "vegetarian",
+      "quick_meal"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 30,
+    "nutrition_facts": {
+      "protein": 8,
+      "carbs": 45,
+      "fat": 15,
+      "calories": 347
+    },
+    "cuisine": "Indian",
+    "cooking_style": "mashed",
+    "flavor_profile": [
+      "spicy",
+      "savory",
+      "buttery"
+    ],
+    "description": "Pav Bhaji — a indian dish cooked in mashed style with flavors that are spicy, savory, buttery.",
+    "popularity_score": 0.89,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_009",
+    "name": "Sambar",
+    "main_ingredients": [
+      "lentils",
+      "tamarind",
+      "vegetables"
+    ],
+    "tags": [
+      "vegan",
+      "gluten_free",
+      "spicy"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 40,
+    "nutrition_facts": {
+      "protein": 10,
+      "carbs": 25,
+      "fat": 8,
+      "calories": 212
+    },
+    "cuisine": "Indian",
+    "cooking_style": "boiled",
+    "flavor_profile": [
+      "tangy",
+      "spicy"
+    ],
+    "description": "Sambar — a indian dish cooked in boiled style with flavors that are tangy, spicy.",
+    "popularity_score": 0.86,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_010",
+    "name": "Rogan Josh",
+    "main_ingredients": [
+      "lamb",
+      "yogurt",
+      "spices"
+    ],
+    "tags": [
+      "comfort_food"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 90,
+    "nutrition_facts": {
+      "protein": 35,
+      "carbs": 12,
+      "fat": 28,
+      "calories": 440
+    },
+    "cuisine": "Indian",
+    "cooking_style": "slow_cooked",
+    "flavor_profile": [
+      "rich",
+      "aromatic",
+      "spicy"
+    ],
+    "description": "Rogan Josh — a indian dish cooked in slow_cooked style with flavors that are rich, aromatic, spicy.",
+    "popularity_score": 0.84,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_011",
+    "name": "Baingan Bharta",
+    "main_ingredients": [
+      "eggplant",
+      "onion",
+      "tomato"
+    ],
+    "tags": [
+      "vegan",
+      "gluten_free"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 45,
+    "nutrition_facts": {
+      "protein": 4,
+      "carbs": 15,
+      "fat": 10,
+      "calories": 166
+    },
+    "cuisine": "Indian",
+    "cooking_style": "roasted",
+    "flavor_profile": [
+      "smoky",
+      "spicy"
+    ],
+    "description": "Baingan Bharta — a indian dish cooked in roasted style with flavors that are smoky, spicy.",
+    "popularity_score": 0.82,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_012",
+    "name": "Goan Fish Curry",
+    "main_ingredients": [
+      "fish",
+      "coconut milk",
+      "kokum"
+    ],
+    "tags": [
+      "dairy_free",
+      "gluten_free"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 25,
+    "nutrition_facts": {
+      "protein": 25,
+      "carbs": 10,
+      "fat": 18,
+      "calories": 302
+    },
+    "cuisine": "Indian",
+    "cooking_style": "simmered",
+    "flavor_profile": [
+      "tangy",
+      "spicy",
+      "creamy"
+    ],
+    "description": "Goan Fish Curry — a indian dish cooked in simmered style with flavors that are tangy, spicy, creamy.",
+    "popularity_score": 0.9,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_013",
+    "name": "Tandoori Chicken",
+    "main_ingredients": [
+      "chicken",
+      "yogurt",
+      "tandoori masala"
+    ],
+    "tags": [
+      "low_carb",
+      "gluten_free"
+    ],
+    "prep_time_min": 180,
+    "cook_time_min": 30,
+    "nutrition_facts": {
+      "protein": 32,
+      "carbs": 5,
+      "fat": 15,
+      "calories": 283
+    },
+    "cuisine": "Indian",
+    "cooking_style": "grilled",
+    "flavor_profile": [
+      "smoky",
+      "spicy",
+      "tangy"
+    ],
+    "description": "Tandoori Chicken — a indian dish cooked in grilled style with flavors that are smoky, spicy, tangy.",
+    "popularity_score": 0.96,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_014",
+    "name": "Mutter Paneer",
+    "main_ingredients": [
+      "peas",
+      "paneer",
+      "tomato"
+    ],
+    "tags": [
+      "vegetarian",
+      "gluten_free"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 25,
+    "nutrition_facts": {
+      "protein": 16,
+      "carbs": 20,
+      "fat": 18,
+      "calories": 306
+    },
+    "cuisine": "Indian",
+    "cooking_style": "sauteed",
+    "flavor_profile": [
+      "savory",
+      "mildly spicy"
+    ],
+    "description": "Mutter Paneer — a indian dish cooked in sauteed style with flavors that are savory, mildly spicy.",
+    "popularity_score": 0.87,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_015",
+    "name": "Bhindi Masala",
+    "main_ingredients": [
+      "okra",
+      "onion",
+      "spices"
+    ],
+    "tags": [
+      "vegan",
+      "quick_meal",
+      "dairy_free"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 20,
+    "nutrition_facts": {
+      "protein": 6,
+      "carbs": 18,
+      "fat": 14,
+      "calories": 222
+    },
+    "cuisine": "Indian",
+    "cooking_style": "stir_fried",
+    "flavor_profile": [
+      "spicy",
+      "savory"
+    ],
+    "description": "Bhindi Masala — a indian dish cooked in stir_fried style with flavors that are spicy, savory.",
+    "popularity_score": 0.83,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_016",
+    "name": "Egg Curry",
+    "main_ingredients": [
+      "egg",
+      "onion",
+      "tomato"
+    ],
+    "tags": [
+      "vegetarian",
+      "gluten_free"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 25,
+    "nutrition_facts": {
+      "protein": 15,
+      "carbs": 12,
+      "fat": 16,
+      "calories": 252
+    },
+    "cuisine": "Indian",
+    "cooking_style": "simmered",
+    "flavor_profile": [
+      "spicy",
+      "savory"
+    ],
+    "description": "Egg Curry — a indian dish cooked in simmered style with flavors that are spicy, savory.",
+    "popularity_score": 0.81,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_017",
+    "name": "Chana Masala",
+    "main_ingredients": [
+      "chickpeas",
+      "tomato",
+      "onion"
+    ],
+    "tags": [
+      "vegan",
+      "comfort_food",
+      "gluten_free"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 30,
+    "nutrition_facts": {
+      "protein": 12,
+      "carbs": 40,
+      "fat": 9,
+      "calories": 289
+    },
+    "cuisine": "Indian",
+    "cooking_style": "sauteed",
+    "flavor_profile": [
+      "spicy",
+      "tangy"
+    ],
+    "description": "Chana Masala — a indian dish cooked in sauteed style with flavors that are spicy, tangy.",
+    "popularity_score": 0.94,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_018",
+    "name": "Jeera Rice",
+    "main_ingredients": [
+      "rice",
+      "cumin seeds",
+      "ghee"
+    ],
+    "tags": [
+      "vegetarian",
+      "gluten_free",
+      "quick_meal"
+    ],
+    "prep_time_min": 5,
+    "cook_time_min": 20,
+    "nutrition_facts": {
+      "protein": 5,
+      "carbs": 45,
+      "fat": 8,
+      "calories": 272
+    },
+    "cuisine": "Indian",
+    "cooking_style": "tempered",
+    "flavor_profile": [
+      "aromatic",
+      "mild"
+    ],
+    "description": "Jeera Rice — a indian dish cooked in tempered style with flavors that are aromatic, mild.",
+    "popularity_score": 0.88,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_019",
+    "name": "Paneer Tikka",
+    "main_ingredients": [
+      "paneer",
+      "yogurt",
+      "capsicum"
+    ],
+    "tags": [
+      "vegetarian",
+      "gluten_free",
+      "appetizer"
+    ],
+    "prep_time_min": 120,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 18,
+      "carbs": 12,
+      "fat": 20,
+      "calories": 300
+    },
+    "cuisine": "Indian",
+    "cooking_style": "grilled",
+    "flavor_profile": [
+      "smoky",
+      "spicy",
+      "tangy"
+    ],
+    "description": "Paneer Tikka — a indian dish cooked in grilled style with flavors that are smoky, spicy, tangy.",
+    "popularity_score": 0.93,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_020",
+    "name": "Vegetable Pulao",
+    "main_ingredients": [
+      "rice",
+      "mixed vegetables",
+      "spices"
+    ],
+    "tags": [
+      "vegan",
+      "family_favorite",
+      "one_pot"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 25,
+    "nutrition_facts": {
+      "protein": 7,
+      "carbs": 50,
+      "fat": 10,
+      "calories": 318
+    },
+    "cuisine": "Indian",
+    "cooking_style": "boiled",
+    "flavor_profile": [
+      "mild",
+      "aromatic"
+    ],
+    "description": "Vegetable Pulao — a indian dish cooked in boiled style with flavors that are mild, aromatic.",
+    "popularity_score": 0.9,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_021",
+    "name": "Dum Aloo",
+    "main_ingredients": [
+      "baby potatoes",
+      "yogurt",
+      "spices"
+    ],
+    "tags": [
+      "vegetarian",
+      "gluten_free"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 40,
+    "nutrition_facts": {
+      "protein": 8,
+      "carbs": 35,
+      "fat": 18,
+      "calories": 334
+    },
+    "cuisine": "Indian",
+    "cooking_style": "slow_cooked",
+    "flavor_profile": [
+      "spicy",
+      "rich",
+      "tangy"
+    ],
+    "description": "Dum Aloo — a indian dish cooked in slow_cooked style with flavors that are spicy, rich, tangy.",
+    "popularity_score": 0.84,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_022",
+    "name": "Masala Khichdi",
+    "main_ingredients": [
+      "rice",
+      "lentils",
+      "vegetables"
+    ],
+    "tags": [
+      "vegan",
+      "comfort_food",
+      "one_pot"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 30,
+    "nutrition_facts": {
+      "protein": 15,
+      "carbs": 55,
+      "fat": 7,
+      "calories": 343
+    },
+    "cuisine": "Indian",
+    "cooking_style": "boiled",
+    "flavor_profile": [
+      "comforting",
+      "mildly spicy"
+    ],
+    "description": "Masala Khichdi — a indian dish cooked in boiled style with flavors that are comforting, mildly spicy.",
+    "popularity_score": 0.89,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_023",
+    "name": "Masala Dosa",
+    "main_ingredients": [
+      "rice",
+      "lentils",
+      "potato"
+    ],
+    "tags": [
+      "vegetarian",
+      "gluten_free"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 20,
+    "nutrition_facts": {
+      "protein": 10,
+      "carbs": 60,
+      "fat": 12,
+      "calories": 388
+    },
+    "cuisine": "Indian",
+    "cooking_style": "pan_fried",
+    "flavor_profile": [
+      "savory",
+      "crispy"
+    ],
+    "description": "Masala Dosa — a indian dish cooked in pan_fried style with flavors that are savory, crispy.",
+    "popularity_score": 0.95,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_024",
+    "name": "Kadhi Pakora",
+    "main_ingredients": [
+      "yogurt",
+      "chickpea flour",
+      "spices"
+    ],
+    "tags": [
+      "vegetarian",
+      "gluten_free"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 35,
+    "nutrition_facts": {
+      "protein": 12,
+      "carbs": 28,
+      "fat": 15,
+      "calories": 295
+    },
+    "cuisine": "Indian",
+    "cooking_style": "simmered",
+    "flavor_profile": [
+      "tangy",
+      "comforting"
+    ],
+    "description": "Kadhi Pakora — a indian dish cooked in simmered style with flavors that are tangy, comforting.",
+    "popularity_score": 0.83,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_025",
+    "name": "Chicken Korma",
+    "main_ingredients": [
+      "chicken",
+      "yogurt",
+      "cashews"
+    ],
+    "tags": [
+      "gluten_free",
+      "comfort_food"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 45,
+    "nutrition_facts": {
+      "protein": 32,
+      "carbs": 15,
+      "fat": 24,
+      "calories": 404
+    },
+    "cuisine": "Indian",
+    "cooking_style": "slow_cooked",
+    "flavor_profile": [
+      "creamy",
+      "mild",
+      "aromatic"
+    ],
+    "description": "Chicken Korma — a indian dish cooked in slow_cooked style with flavors that are creamy, mild, aromatic.",
+    "popularity_score": 0.91,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_026",
+    "name": "Tamarind Rice",
+    "main_ingredients": [
+      "rice",
+      "tamarind",
+      "peanuts"
+    ],
+    "tags": [
+      "vegan",
+      "gluten_free"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 25,
+    "nutrition_facts": {
+      "protein": 8,
+      "carbs": 55,
+      "fat": 15,
+      "calories": 387
+    },
+    "cuisine": "Indian",
+    "cooking_style": "sauteed",
+    "flavor_profile": [
+      "tangy",
+      "spicy"
+    ],
+    "description": "Tamarind Rice — a indian dish cooked in sauteed style with flavors that are tangy, spicy.",
+    "popularity_score": 0.79,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_027",
+    "name": "Upma",
+    "main_ingredients": [
+      "semolina",
+      "vegetables",
+      "mustard seeds"
+    ],
+    "tags": [
+      "vegetarian",
+      "quick_meal",
+      "breakfast"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 6,
+      "carbs": 40,
+      "fat": 10,
+      "calories": 274
+    },
+    "cuisine": "Indian",
+    "cooking_style": "sauteed",
+    "flavor_profile": [
+      "savory",
+      "mild"
+    ],
+    "description": "Upma — a indian dish cooked in sauteed style with flavors that are savory, mild.",
+    "popularity_score": 0.8,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_028",
+    "name": "Poha",
+    "main_ingredients": [
+      "flattened rice",
+      "peanuts",
+      "onion"
+    ],
+    "tags": [
+      "vegan",
+      "gluten_free",
+      "breakfast"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 10,
+    "nutrition_facts": {
+      "protein": 7,
+      "carbs": 50,
+      "fat": 12,
+      "calories": 336
+    },
+    "cuisine": "Indian",
+    "cooking_style": "sauteed",
+    "flavor_profile": [
+      "light",
+      "savory",
+      "tangy"
+    ],
+    "description": "Poha — a indian dish cooked in sauteed style with flavors that are light, savory, tangy.",
+    "popularity_score": 0.85,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_029",
+    "name": "Tomato Rasam",
+    "main_ingredients": [
+      "tomato",
+      "tamarind",
+      "spices"
+    ],
+    "tags": [
+      "vegan",
+      "gluten_free",
+      "light"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 20,
+    "nutrition_facts": {
+      "protein": 3,
+      "carbs": 15,
+      "fat": 5,
+      "calories": 117
+    },
+    "cuisine": "Indian",
+    "cooking_style": "boiled",
+    "flavor_profile": [
+      "tangy",
+      "spicy",
+      "soupy"
+    ],
+    "description": "Tomato Rasam — a indian dish cooked in boiled style with flavors that are tangy, spicy, soupy.",
+    "popularity_score": 0.78,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_030",
+    "name": "Aloo Matar",
+    "main_ingredients": [
+      "potato",
+      "peas",
+      "tomato gravy"
+    ],
+    "tags": [
+      "vegan",
+      "gluten_free"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 25,
+    "nutrition_facts": {
+      "protein": 9,
+      "carbs": 38,
+      "fat": 10,
+      "calories": 278
+    },
+    "cuisine": "Indian",
+    "cooking_style": "sauteed",
+    "flavor_profile": [
+      "spicy",
+      "savory"
+    ],
+    "description": "Aloo Matar — a indian dish cooked in sauteed style with flavors that are spicy, savory.",
+    "popularity_score": 0.82,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_031",
+    "name": "Gobi Manchurian",
+    "main_ingredients": [
+      "cauliflower",
+      "soy sauce",
+      "ginger"
+    ],
+    "tags": [
+      "vegetarian",
+      "spicy"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 25,
+    "nutrition_facts": {
+      "protein": 8,
+      "carbs": 30,
+      "fat": 18,
+      "calories": 314
+    },
+    "cuisine": "Indian",
+    "cooking_style": "fried",
+    "flavor_profile": [
+      "spicy",
+      "umami",
+      "tangy"
+    ],
+    "description": "Gobi Manchurian — a indian dish cooked in fried style with flavors that are spicy, umami, tangy.",
+    "popularity_score": 0.88,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_032",
+    "name": "Malai Kofta",
+    "main_ingredients": [
+      "paneer",
+      "potato",
+      "cream"
+    ],
+    "tags": [
+      "vegetarian",
+      "rich"
+    ],
+    "prep_time_min": 30,
+    "cook_time_min": 30,
+    "nutrition_facts": {
+      "protein": 12,
+      "carbs": 25,
+      "fat": 28,
+      "calories": 390
+    },
+    "cuisine": "Indian",
+    "cooking_style": "fried",
+    "flavor_profile": [
+      "rich",
+      "creamy",
+      "mildly sweet"
+    ],
+    "description": "Malai Kofta — a indian dish cooked in fried style with flavors that are rich, creamy, mildly sweet.",
+    "popularity_score": 0.86,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_033",
+    "name": "Veg Kolhapuri",
+    "main_ingredients": [
+      "mixed vegetables",
+      "coconut",
+      "chili"
+    ],
+    "tags": [
+      "vegetarian",
+      "spicy"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 30,
+    "nutrition_facts": {
+      "protein": 9,
+      "carbs": 22,
+      "fat": 16,
+      "calories": 268
+    },
+    "cuisine": "Indian",
+    "cooking_style": "sauteed",
+    "flavor_profile": [
+      "very spicy",
+      "rich",
+      "aromatic"
+    ],
+    "description": "Veg Kolhapuri — a indian dish cooked in sauteed style with flavors that are very spicy, rich, aromatic.",
+    "popularity_score": 0.79,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_034",
+    "name": "Idli",
+    "main_ingredients": [
+      "rice",
+      "urad dal"
+    ],
+    "tags": [
+      "vegan",
+      "gluten_free",
+      "breakfast"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 8,
+      "carbs": 35,
+      "fat": 1,
+      "calories": 181
+    },
+    "cuisine": "Indian",
+    "cooking_style": "steamed",
+    "flavor_profile": [
+      "soft",
+      "mild",
+      "healthy"
+    ],
+    "description": "Idli — a indian dish cooked in steamed style with flavors that are soft, mild, healthy.",
+    "popularity_score": 0.92,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_035",
+    "name": "Lemon Rice",
+    "main_ingredients": [
+      "rice",
+      "lemon juice",
+      "curry leaves"
+    ],
+    "tags": [
+      "vegan",
+      "gluten_free",
+      "quick_meal"
+    ],
+    "prep_time_min": 5,
+    "cook_time_min": 20,
+    "nutrition_facts": {
+      "protein": 6,
+      "carbs": 50,
+      "fat": 12,
+      "calories": 332
+    },
+    "cuisine": "Indian",
+    "cooking_style": "sauteed",
+    "flavor_profile": [
+      "zesty",
+      "fresh",
+      "tangy"
+    ],
+    "description": "Lemon Rice — a indian dish cooked in sauteed style with flavors that are zesty, fresh, tangy.",
+    "popularity_score": 0.87,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_036",
+    "name": "Spaghetti Carbonara",
+    "main_ingredients": [
+      "spaghetti",
+      "egg",
+      "pecorino cheese"
+    ],
+    "tags": [
+      "comfort_food"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 25,
+      "carbs": 60,
+      "fat": 22,
+      "calories": 538
+    },
+    "cuisine": "Italian",
+    "cooking_style": "boiled",
+    "flavor_profile": [
+      "creamy",
+      "savory",
+      "rich"
+    ],
+    "description": "Spaghetti Carbonara — a italian dish cooked in boiled style with flavors that are creamy, savory, rich.",
+    "popularity_score": 0.94,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_037",
+    "name": "Margherita Pizza",
+    "main_ingredients": [
+      "pizza dough",
+      "tomato",
+      "mozzarella"
+    ],
+    "tags": [
+      "vegetarian",
+      "family_favorite"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 18,
+      "carbs": 50,
+      "fat": 20,
+      "calories": 452
+    },
+    "cuisine": "Italian",
+    "cooking_style": "baked",
+    "flavor_profile": [
+      "savory",
+      "cheesy",
+      "fresh"
+    ],
+    "description": "Margherita Pizza — a italian dish cooked in baked style with flavors that are savory, cheesy, fresh.",
+    "popularity_score": 0.98,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_038",
+    "name": "Pesto Pasta",
+    "main_ingredients": [
+      "pasta",
+      "basil",
+      "pine nuts"
+    ],
+    "tags": [
+      "vegetarian",
+      "quick_meal"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 15,
+      "carbs": 55,
+      "fat": 25,
+      "calories": 505
+    },
+    "cuisine": "Italian",
+    "cooking_style": "boiled",
+    "flavor_profile": [
+      "fresh",
+      "herby",
+      "garlicky"
+    ],
+    "description": "Pesto Pasta — a italian dish cooked in boiled style with flavors that are fresh, herby, garlicky.",
+    "popularity_score": 0.93,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_039",
+    "name": "Lasagna Bolognese",
+    "main_ingredients": [
+      "pasta",
+      "ground beef",
+      "bechamel"
+    ],
+    "tags": [
+      "family_favorite",
+      "comfort_food"
+    ],
+    "prep_time_min": 30,
+    "cook_time_min": 45,
+    "nutrition_facts": {
+      "protein": 30,
+      "carbs": 45,
+      "fat": 28,
+      "calories": 552
+    },
+    "cuisine": "Italian",
+    "cooking_style": "baked",
+    "flavor_profile": [
+      "rich",
+      "savory",
+      "meaty"
+    ],
+    "description": "Lasagna Bolognese — a italian dish cooked in baked style with flavors that are rich, savory, meaty.",
+    "popularity_score": 0.96,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_040",
+    "name": "Mushroom Risotto",
+    "main_ingredients": [
+      "arborio rice",
+      "mushrooms",
+      "parmesan"
+    ],
+    "tags": [
+      "vegetarian",
+      "gluten_free"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 35,
+    "nutrition_facts": {
+      "protein": 12,
+      "carbs": 50,
+      "fat": 18,
+      "calories": 410
+    },
+    "cuisine": "Italian",
+    "cooking_style": "simmered",
+    "flavor_profile": [
+      "creamy",
+      "umami",
+      "savory"
+    ],
+    "description": "Mushroom Risotto — a italian dish cooked in simmered style with flavors that are creamy, umami, savory.",
+    "popularity_score": 0.89,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_041",
+    "name": "Fettuccine Alfredo",
+    "main_ingredients": [
+      "fettuccine",
+      "heavy cream",
+      "parmesan"
+    ],
+    "tags": [
+      "vegetarian",
+      "rich"
+    ],
+    "prep_time_min": 5,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 16,
+      "carbs": 58,
+      "fat": 35,
+      "calories": 611
+    },
+    "cuisine": "Italian",
+    "cooking_style": "boiled",
+    "flavor_profile": [
+      "creamy",
+      "rich",
+      "cheesy"
+    ],
+    "description": "Fettuccine Alfredo — a italian dish cooked in boiled style with flavors that are creamy, rich, cheesy.",
+    "popularity_score": 0.91,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_042",
+    "name": "Chicken Parmesan",
+    "main_ingredients": [
+      "chicken breast",
+      "marinara sauce",
+      "mozzarella"
+    ],
+    "tags": [
+      "family_favorite"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 25,
+    "nutrition_facts": {
+      "protein": 40,
+      "carbs": 20,
+      "fat": 22,
+      "calories": 438
+    },
+    "cuisine": "Italian",
+    "cooking_style": "fried",
+    "flavor_profile": [
+      "savory",
+      "cheesy",
+      "crispy"
+    ],
+    "description": "Chicken Parmesan — a italian dish cooked in fried style with flavors that are savory, cheesy, crispy.",
+    "popularity_score": 0.9,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_043",
+    "name": "Caprese Salad",
+    "main_ingredients": [
+      "tomato",
+      "mozzarella",
+      "basil"
+    ],
+    "tags": [
+      "vegetarian",
+      "gluten_free",
+      "quick_meal"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 0,
+    "nutrition_facts": {
+      "protein": 12,
+      "carbs": 8,
+      "fat": 18,
+      "calories": 242
+    },
+    "cuisine": "Italian",
+    "cooking_style": "fresh",
+    "flavor_profile": [
+      "fresh",
+      "light",
+      "herby"
+    ],
+    "description": "Caprese Salad — a italian dish cooked in fresh style with flavors that are fresh, light, herby.",
+    "popularity_score": 0.85,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_044",
+    "name": "Bruschetta",
+    "main_ingredients": [
+      "bread",
+      "tomato",
+      "garlic"
+    ],
+    "tags": [
+      "vegan",
+      "appetizer",
+      "quick_meal"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 5,
+    "nutrition_facts": {
+      "protein": 6,
+      "carbs": 25,
+      "fat": 8,
+      "calories": 196
+    },
+    "cuisine": "Italian",
+    "cooking_style": "assembled",
+    "flavor_profile": [
+      "fresh",
+      "garlicky",
+      "crispy"
+    ],
+    "description": "Bruschetta — a italian dish cooked in assembled style with flavors that are fresh, garlicky, crispy.",
+    "popularity_score": 0.84,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_045",
+    "name": "Minestrone Soup",
+    "main_ingredients": [
+      "vegetables",
+      "beans",
+      "pasta"
+    ],
+    "tags": [
+      "vegan",
+      "healthy",
+      "comfort_food"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 40,
+    "nutrition_facts": {
+      "protein": 10,
+      "carbs": 35,
+      "fat": 5,
+      "calories": 225
+    },
+    "cuisine": "Italian",
+    "cooking_style": "simmered",
+    "flavor_profile": [
+      "hearty",
+      "savory",
+      "vegetable"
+    ],
+    "description": "Minestrone Soup — a italian dish cooked in simmered style with flavors that are hearty, savory, vegetable.",
+    "popularity_score": 0.82,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_046",
+    "name": "Cheeseburger",
+    "main_ingredients": [
+      "ground beef",
+      "cheese",
+      "bun"
+    ],
+    "tags": [
+      "family_favorite"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 28,
+      "carbs": 30,
+      "fat": 25,
+      "calories": 457
+    },
+    "cuisine": "American",
+    "cooking_style": "grilled",
+    "flavor_profile": [
+      "savory",
+      "juicy",
+      "cheesy"
+    ],
+    "description": "Cheeseburger — a american dish cooked in grilled style with flavors that are savory, juicy, cheesy.",
+    "popularity_score": 0.97,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_047",
+    "name": "Mac and Cheese",
+    "main_ingredients": [
+      "macaroni",
+      "cheddar cheese",
+      "milk"
+    ],
+    "tags": [
+      "vegetarian",
+      "comfort_food"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 20,
+    "nutrition_facts": {
+      "protein": 20,
+      "carbs": 55,
+      "fat": 30,
+      "calories": 570
+    },
+    "cuisine": "American",
+    "cooking_style": "baked",
+    "flavor_profile": [
+      "creamy",
+      "cheesy",
+      "comforting"
+    ],
+    "description": "Mac and Cheese — a american dish cooked in baked style with flavors that are creamy, cheesy, comforting.",
+    "popularity_score": 0.95,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_048",
+    "name": "BBQ Pulled Pork",
+    "main_ingredients": [
+      "pork shoulder",
+      "bbq sauce",
+      "bun"
+    ],
+    "tags": [
+      "slow_cooked"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 360,
+    "nutrition_facts": {
+      "protein": 35,
+      "carbs": 40,
+      "fat": 20,
+      "calories": 480
+    },
+    "cuisine": "American",
+    "cooking_style": "slow_cooked",
+    "flavor_profile": [
+      "smoky",
+      "sweet",
+      "savory"
+    ],
+    "description": "BBQ Pulled Pork — a american dish cooked in slow_cooked style with flavors that are smoky, sweet, savory.",
+    "popularity_score": 0.92,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_049",
+    "name": "Caesar Salad",
+    "main_ingredients": [
+      "romaine lettuce",
+      "croutons",
+      "parmesan"
+    ],
+    "tags": [
+      "light",
+      "quick_meal"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 0,
+    "nutrition_facts": {
+      "protein": 8,
+      "carbs": 15,
+      "fat": 20,
+      "calories": 272
+    },
+    "cuisine": "American",
+    "cooking_style": "fresh",
+    "flavor_profile": [
+      "tangy",
+      "creamy",
+      "savory"
+    ],
+    "description": "Caesar Salad — a american dish cooked in fresh style with flavors that are tangy, creamy, savory.",
+    "popularity_score": 0.88,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_050",
+    "name": "Buffalo Wings",
+    "main_ingredients": [
+      "chicken wings",
+      "hot sauce",
+      "butter"
+    ],
+    "tags": [
+      "spicy",
+      "appetizer"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 25,
+    "nutrition_facts": {
+      "protein": 25,
+      "carbs": 5,
+      "fat": 30,
+      "calories": 390
+    },
+    "cuisine": "American",
+    "cooking_style": "fried",
+    "flavor_profile": [
+      "spicy",
+      "tangy",
+      "buttery"
+    ],
+    "description": "Buffalo Wings — a american dish cooked in fried style with flavors that are spicy, tangy, buttery.",
+    "popularity_score": 0.93,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_051",
+    "name": "Pancakes",
+    "main_ingredients": [
+      "flour",
+      "egg",
+      "milk"
+    ],
+    "tags": [
+      "vegetarian",
+      "breakfast",
+      "family_favorite"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 10,
+      "carbs": 50,
+      "fat": 12,
+      "calories": 348
+    },
+    "cuisine": "American",
+    "cooking_style": "pan_fried",
+    "flavor_profile": [
+      "sweet",
+      "fluffy",
+      "soft"
+    ],
+    "description": "Pancakes — a american dish cooked in pan_fried style with flavors that are sweet, fluffy, soft.",
+    "popularity_score": 0.9,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_052",
+    "name": "Chili con Carne",
+    "main_ingredients": [
+      "ground beef",
+      "beans",
+      "chili powder"
+    ],
+    "tags": [
+      "comfort_food",
+      "spicy",
+      "hearty"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 60,
+    "nutrition_facts": {
+      "protein": 25,
+      "carbs": 30,
+      "fat": 18,
+      "calories": 382
+    },
+    "cuisine": "American",
+    "cooking_style": "simmered",
+    "flavor_profile": [
+      "spicy",
+      "hearty",
+      "smoky"
+    ],
+    "description": "Chili con Carne — a american dish cooked in simmered style with flavors that are spicy, hearty, smoky.",
+    "popularity_score": 0.87,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_053",
+    "name": "Cobb Salad",
+    "main_ingredients": [
+      "lettuce",
+      "chicken",
+      "bacon",
+      "egg",
+      "avocado"
+    ],
+    "tags": [
+      "gluten_free",
+      "low_carb"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 30,
+      "carbs": 10,
+      "fat": 35,
+      "calories": 475
+    },
+    "cuisine": "American",
+    "cooking_style": "assembled",
+    "flavor_profile": [
+      "savory",
+      "fresh",
+      "rich"
+    ],
+    "description": "Cobb Salad — a american dish cooked in assembled style with flavors that are savory, fresh, rich.",
+    "popularity_score": 0.86,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_054",
+    "name": "Southern Fried Chicken",
+    "main_ingredients": [
+      "chicken",
+      "flour",
+      "buttermilk"
+    ],
+    "tags": [
+      "comfort_food"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 20,
+    "nutrition_facts": {
+      "protein": 32,
+      "carbs": 20,
+      "fat": 28,
+      "calories": 460
+    },
+    "cuisine": "American",
+    "cooking_style": "fried",
+    "flavor_profile": [
+      "crispy",
+      "savory",
+      "juicy"
+    ],
+    "description": "Southern Fried Chicken — a american dish cooked in fried style with flavors that are crispy, savory, juicy.",
+    "popularity_score": 0.91,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_055",
+    "name": "New England Clam Chowder",
+    "main_ingredients": [
+      "clams",
+      "potato",
+      "cream"
+    ],
+    "tags": [
+      "seafood",
+      "comfort_food"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 30,
+    "nutrition_facts": {
+      "protein": 15,
+      "carbs": 25,
+      "fat": 20,
+      "calories": 340
+    },
+    "cuisine": "American",
+    "cooking_style": "simmered",
+    "flavor_profile": [
+      "creamy",
+      "savory",
+      "briny"
+    ],
+    "description": "New England Clam Chowder — a american dish cooked in simmered style with flavors that are creamy, savory, briny.",
+    "popularity_score": 0.84,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_056",
+    "name": "Tacos al Pastor",
+    "main_ingredients": [
+      "pork",
+      "pineapple",
+      "chili"
+    ],
+    "tags": [
+      "spicy"
+    ],
+    "prep_time_min": 30,
+    "cook_time_min": 20,
+    "nutrition_facts": {
+      "protein": 20,
+      "carbs": 25,
+      "fat": 18,
+      "calories": 342
+    },
+    "cuisine": "Mexican",
+    "cooking_style": "grilled",
+    "flavor_profile": [
+      "spicy",
+      "sweet",
+      "savory"
+    ],
+    "description": "Tacos al Pastor — a mexican dish cooked in grilled style with flavors that are spicy, sweet, savory.",
+    "popularity_score": 0.94,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_057",
+    "name": "Chicken Burrito Bowl",
+    "main_ingredients": [
+      "chicken",
+      "rice",
+      "beans",
+      "salsa"
+    ],
+    "tags": [
+      "gluten_free",
+      "family_favorite"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 20,
+    "nutrition_facts": {
+      "protein": 30,
+      "carbs": 50,
+      "fat": 15,
+      "calories": 455
+    },
+    "cuisine": "Mexican",
+    "cooking_style": "assembled",
+    "flavor_profile": [
+      "hearty",
+      "fresh",
+      "spicy"
+    ],
+    "description": "Chicken Burrito Bowl — a mexican dish cooked in assembled style with flavors that are hearty, fresh, spicy.",
+    "popularity_score": 0.91,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_058",
+    "name": "Guacamole",
+    "main_ingredients": [
+      "avocado",
+      "lime",
+      "onion",
+      "cilantro"
+    ],
+    "tags": [
+      "vegan",
+      "gluten_free",
+      "quick_meal"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 0,
+    "nutrition_facts": {
+      "protein": 4,
+      "carbs": 15,
+      "fat": 25,
+      "calories": 291
+    },
+    "cuisine": "Mexican",
+    "cooking_style": "mashed",
+    "flavor_profile": [
+      "fresh",
+      "tangy",
+      "creamy"
+    ],
+    "description": "Guacamole — a mexican dish cooked in mashed style with flavors that are fresh, tangy, creamy.",
+    "popularity_score": 0.96,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_059",
+    "name": "Beef Enchiladas",
+    "main_ingredients": [
+      "ground beef",
+      "tortillas",
+      "enchilada sauce"
+    ],
+    "tags": [
+      "comfort_food",
+      "cheesy"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 25,
+    "nutrition_facts": {
+      "protein": 28,
+      "carbs": 35,
+      "fat": 26,
+      "calories": 486
+    },
+    "cuisine": "Mexican",
+    "cooking_style": "baked",
+    "flavor_profile": [
+      "savory",
+      "spicy",
+      "cheesy"
+    ],
+    "description": "Beef Enchiladas — a mexican dish cooked in baked style with flavors that are savory, spicy, cheesy.",
+    "popularity_score": 0.89,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_060",
+    "name": "Chicken Quesadilla",
+    "main_ingredients": [
+      "chicken",
+      "cheese",
+      "tortilla"
+    ],
+    "tags": [
+      "quick_meal",
+      "family_favorite"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 10,
+    "nutrition_facts": {
+      "protein": 25,
+      "carbs": 30,
+      "fat": 22,
+      "calories": 418
+    },
+    "cuisine": "Mexican",
+    "cooking_style": "pan_fried",
+    "flavor_profile": [
+      "cheesy",
+      "savory"
+    ],
+    "description": "Chicken Quesadilla — a mexican dish cooked in pan_fried style with flavors that are cheesy, savory.",
+    "popularity_score": 0.92,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_061",
+    "name": "Fajitas",
+    "main_ingredients": [
+      "chicken",
+      "bell peppers",
+      "onions"
+    ],
+    "tags": [
+      "quick_meal"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 28,
+      "carbs": 15,
+      "fat": 12,
+      "calories": 280
+    },
+    "cuisine": "Mexican",
+    "cooking_style": "stir_fried",
+    "flavor_profile": [
+      "smoky",
+      "savory"
+    ],
+    "description": "Fajitas — a mexican dish cooked in stir_fried style with flavors that are smoky, savory.",
+    "popularity_score": 0.88,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_062",
+    "name": "Chilaquiles",
+    "main_ingredients": [
+      "tortilla chips",
+      "salsa",
+      "egg",
+      "cheese"
+    ],
+    "tags": [
+      "vegetarian",
+      "breakfast",
+      "spicy"
+    ],
+    "prep_time_min": 5,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 18,
+      "carbs": 40,
+      "fat": 25,
+      "calories": 457
+    },
+    "cuisine": "Mexican",
+    "cooking_style": "simmered",
+    "flavor_profile": [
+      "spicy",
+      "savory",
+      "tangy"
+    ],
+    "description": "Chilaquiles — a mexican dish cooked in simmered style with flavors that are spicy, savory, tangy.",
+    "popularity_score": 0.85,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_063",
+    "name": "Pozole",
+    "main_ingredients": [
+      "pork",
+      "hominy",
+      "chili"
+    ],
+    "tags": [
+      "gluten_free",
+      "hearty"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 120,
+    "nutrition_facts": {
+      "protein": 25,
+      "carbs": 35,
+      "fat": 15,
+      "calories": 375
+    },
+    "cuisine": "Mexican",
+    "cooking_style": "simmered",
+    "flavor_profile": [
+      "hearty",
+      "spicy",
+      "rich"
+    ],
+    "description": "Pozole — a mexican dish cooked in simmered style with flavors that are hearty, spicy, rich.",
+    "popularity_score": 0.81,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_064",
+    "name": "Elote (Mexican Street Corn)",
+    "main_ingredients": [
+      "corn",
+      "mayonnaise",
+      "cotija cheese",
+      "chili powder"
+    ],
+    "tags": [
+      "vegetarian",
+      "appetizer"
+    ],
+    "prep_time_min": 5,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 8,
+      "carbs": 30,
+      "fat": 20,
+      "calories": 332
+    },
+    "cuisine": "Mexican",
+    "cooking_style": "grilled",
+    "flavor_profile": [
+      "creamy",
+      "smoky",
+      "spicy",
+      "tangy"
+    ],
+    "description": "Elote (Mexican Street Corn) — a mexican dish cooked in grilled style with flavors that are creamy, smoky, spicy, tangy.",
+    "popularity_score": 0.87,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_065",
+    "name": "Huevos Rancheros",
+    "main_ingredients": [
+      "egg",
+      "tortilla",
+      "salsa"
+    ],
+    "tags": [
+      "vegetarian",
+      "breakfast",
+      "gluten_free"
+    ],
+    "prep_time_min": 5,
+    "cook_time_min": 10,
+    "nutrition_facts": {
+      "protein": 15,
+      "carbs": 20,
+      "fat": 18,
+      "calories": 298
+    },
+    "cuisine": "Mexican",
+    "cooking_style": "fried",
+    "flavor_profile": [
+      "savory",
+      "spicy"
+    ],
+    "description": "Huevos Rancheros — a mexican dish cooked in fried style with flavors that are savory, spicy.",
+    "popularity_score": 0.83,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_066",
+    "name": "Kung Pao Chicken",
+    "main_ingredients": [
+      "chicken",
+      "peanuts",
+      "chili peppers"
+    ],
+    "tags": [
+      "spicy",
+      "quick_meal"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 28,
+      "carbs": 20,
+      "fat": 22,
+      "calories": 390
+    },
+    "cuisine": "Chinese",
+    "cooking_style": "stir_fried",
+    "flavor_profile": [
+      "spicy",
+      "tangy",
+      "savory"
+    ],
+    "description": "Kung Pao Chicken — a chinese dish cooked in stir_fried style with flavors that are spicy, tangy, savory.",
+    "popularity_score": 0.94,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_067",
+    "name": "Sweet and Sour Pork",
+    "main_ingredients": [
+      "pork",
+      "pineapple",
+      "bell peppers"
+    ],
+    "tags": [
+      "family_favorite"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 20,
+    "nutrition_facts": {
+      "protein": 20,
+      "carbs": 45,
+      "fat": 25,
+      "calories": 485
+    },
+    "cuisine": "Chinese",
+    "cooking_style": "fried",
+    "flavor_profile": [
+      "sweet",
+      "tangy",
+      "crispy"
+    ],
+    "description": "Sweet and Sour Pork — a chinese dish cooked in fried style with flavors that are sweet, tangy, crispy.",
+    "popularity_score": 0.9,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_068",
+    "name": "Beef and Broccoli",
+    "main_ingredients": [
+      "beef",
+      "broccoli",
+      "soy sauce"
+    ],
+    "tags": [
+      "quick_meal"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 10,
+    "nutrition_facts": {
+      "protein": 30,
+      "carbs": 15,
+      "fat": 18,
+      "calories": 342
+    },
+    "cuisine": "Chinese",
+    "cooking_style": "stir_fried",
+    "flavor_profile": [
+      "savory",
+      "umami"
+    ],
+    "description": "Beef and Broccoli — a chinese dish cooked in stir_fried style with flavors that are savory, umami.",
+    "popularity_score": 0.92,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_069",
+    "name": "Vegetable Fried Rice",
+    "main_ingredients": [
+      "rice",
+      "egg",
+      "mixed vegetables"
+    ],
+    "tags": [
+      "vegetarian",
+      "quick_meal"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 12,
+      "carbs": 55,
+      "fat": 14,
+      "calories": 394
+    },
+    "cuisine": "Chinese",
+    "cooking_style": "stir_fried",
+    "flavor_profile": [
+      "savory",
+      "umami"
+    ],
+    "description": "Vegetable Fried Rice — a chinese dish cooked in stir_fried style with flavors that are savory, umami.",
+    "popularity_score": 0.93,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_070",
+    "name": "Mapo Tofu",
+    "main_ingredients": [
+      "tofu",
+      "ground pork",
+      "doubanjiang"
+    ],
+    "tags": [
+      "spicy"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 20,
+      "carbs": 10,
+      "fat": 25,
+      "calories": 345
+    },
+    "cuisine": "Chinese",
+    "cooking_style": "braised",
+    "flavor_profile": [
+      "spicy",
+      "numbing",
+      "savory"
+    ],
+    "description": "Mapo Tofu — a chinese dish cooked in braised style with flavors that are spicy, numbing, savory.",
+    "popularity_score": 0.88,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_071",
+    "name": "Wonton Soup",
+    "main_ingredients": [
+      "wontons",
+      "broth",
+      "bok choy"
+    ],
+    "tags": [
+      "light",
+      "comfort_food"
+    ],
+    "prep_time_min": 25,
+    "cook_time_min": 10,
+    "nutrition_facts": {
+      "protein": 15,
+      "carbs": 25,
+      "fat": 8,
+      "calories": 232
+    },
+    "cuisine": "Chinese",
+    "cooking_style": "boiled",
+    "flavor_profile": [
+      "savory",
+      "light",
+      "comforting"
+    ],
+    "description": "Wonton Soup — a chinese dish cooked in boiled style with flavors that are savory, light, comforting.",
+    "popularity_score": 0.87,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_072",
+    "name": "Chow Mein",
+    "main_ingredients": [
+      "noodles",
+      "vegetables",
+      "soy sauce"
+    ],
+    "tags": [
+      "vegetarian",
+      "quick_meal"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 10,
+      "carbs": 45,
+      "fat": 18,
+      "calories": 382
+    },
+    "cuisine": "Chinese",
+    "cooking_style": "stir_fried",
+    "flavor_profile": [
+      "savory",
+      "umami"
+    ],
+    "description": "Chow Mein — a chinese dish cooked in stir_fried style with flavors that are savory, umami.",
+    "popularity_score": 0.91,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_073",
+    "name": "Spring Rolls",
+    "main_ingredients": [
+      "vegetables",
+      "wrapper",
+      "cabbage"
+    ],
+    "tags": [
+      "vegan",
+      "appetizer"
+    ],
+    "prep_time_min": 25,
+    "cook_time_min": 10,
+    "nutrition_facts": {
+      "protein": 5,
+      "carbs": 20,
+      "fat": 12,
+      "calories": 208
+    },
+    "cuisine": "Chinese",
+    "cooking_style": "fried",
+    "flavor_profile": [
+      "crispy",
+      "savory"
+    ],
+    "description": "Spring Rolls — a chinese dish cooked in fried style with flavors that are crispy, savory.",
+    "popularity_score": 0.86,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_074",
+    "name": "General Tso's Chicken",
+    "main_ingredients": [
+      "chicken",
+      "soy sauce",
+      "chili"
+    ],
+    "tags": [
+      "spicy"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 20,
+    "nutrition_facts": {
+      "protein": 28,
+      "carbs": 50,
+      "fat": 24,
+      "calories": 528
+    },
+    "cuisine": "Chinese",
+    "cooking_style": "fried",
+    "flavor_profile": [
+      "sweet",
+      "spicy",
+      "tangy"
+    ],
+    "description": "General Tso's Chicken — a chinese dish cooked in fried style with flavors that are sweet, spicy, tangy.",
+    "popularity_score": 0.9,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_075",
+    "name": "Hot and Sour Soup",
+    "main_ingredients": [
+      "tofu",
+      "mushrooms",
+      "bamboo shoots"
+    ],
+    "tags": [
+      "vegetarian",
+      "spicy"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 20,
+    "nutrition_facts": {
+      "protein": 8,
+      "carbs": 15,
+      "fat": 6,
+      "calories": 146
+    },
+    "cuisine": "Chinese",
+    "cooking_style": "boiled",
+    "flavor_profile": [
+      "spicy",
+      "sour",
+      "savory"
+    ],
+    "description": "Hot and Sour Soup — a chinese dish cooked in boiled style with flavors that are spicy, sour, savory.",
+    "popularity_score": 0.84,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_076",
+    "name": "Sushi (Maki Roll)",
+    "main_ingredients": [
+      "rice",
+      "seaweed",
+      "fish"
+    ],
+    "tags": [
+      "seafood",
+      "healthy"
+    ],
+    "prep_time_min": 30,
+    "cook_time_min": 20,
+    "nutrition_facts": {
+      "protein": 15,
+      "carbs": 40,
+      "fat": 8,
+      "calories": 292
+    },
+    "cuisine": "Japanese",
+    "cooking_style": "assembled",
+    "flavor_profile": [
+      "fresh",
+      "umami",
+      "savory"
+    ],
+    "description": "Sushi (Maki Roll) — a japanese dish cooked in assembled style with flavors that are fresh, umami, savory.",
+    "popularity_score": 0.97,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_077",
+    "name": "Tonkotsu Ramen",
+    "main_ingredients": [
+      "pork broth",
+      "ramen noodles",
+      "pork belly"
+    ],
+    "tags": [
+      "comfort_food"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 720,
+    "nutrition_facts": {
+      "protein": 30,
+      "carbs": 60,
+      "fat": 25,
+      "calories": 585
+    },
+    "cuisine": "Japanese",
+    "cooking_style": "simmered",
+    "flavor_profile": [
+      "rich",
+      "creamy",
+      "umami"
+    ],
+    "description": "Tonkotsu Ramen — a japanese dish cooked in simmered style with flavors that are rich, creamy, umami.",
+    "popularity_score": 0.95,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_078",
+    "name": "Chicken Teriyaki",
+    "main_ingredients": [
+      "chicken thigh",
+      "soy sauce",
+      "mirin"
+    ],
+    "tags": [
+      "quick_meal",
+      "family_favorite"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 28,
+      "carbs": 20,
+      "fat": 15,
+      "calories": 327
+    },
+    "cuisine": "Japanese",
+    "cooking_style": "grilled",
+    "flavor_profile": [
+      "sweet",
+      "savory",
+      "umami"
+    ],
+    "description": "Chicken Teriyaki — a japanese dish cooked in grilled style with flavors that are sweet, savory, umami.",
+    "popularity_score": 0.93,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_079",
+    "name": "Shrimp Tempura",
+    "main_ingredients": [
+      "shrimp",
+      "tempura batter"
+    ],
+    "tags": [
+      "seafood",
+      "appetizer"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 10,
+    "nutrition_facts": {
+      "protein": 18,
+      "carbs": 25,
+      "fat": 20,
+      "calories": 352
+    },
+    "cuisine": "Japanese",
+    "cooking_style": "fried",
+    "flavor_profile": [
+      "light",
+      "crispy",
+      "savory"
+    ],
+    "description": "Shrimp Tempura — a japanese dish cooked in fried style with flavors that are light, crispy, savory.",
+    "popularity_score": 0.89,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_080",
+    "name": "Miso Soup",
+    "main_ingredients": [
+      "miso paste",
+      "tofu",
+      "seaweed"
+    ],
+    "tags": [
+      "vegan",
+      "light",
+      "quick_meal"
+    ],
+    "prep_time_min": 5,
+    "cook_time_min": 5,
+    "nutrition_facts": {
+      "protein": 6,
+      "carbs": 8,
+      "fat": 4,
+      "calories": 92
+    },
+    "cuisine": "Japanese",
+    "cooking_style": "boiled",
+    "flavor_profile": [
+      "umami",
+      "savory",
+      "light"
+    ],
+    "description": "Miso Soup — a japanese dish cooked in boiled style with flavors that are umami, savory, light.",
+    "popularity_score": 0.88,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_081",
+    "name": "Chicken Satay",
+    "main_ingredients": [
+      "chicken",
+      "peanut sauce",
+      "coconut milk"
+    ],
+    "tags": [
+      "appetizer"
+    ],
+    "prep_time_min": 25,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 25,
+      "carbs": 15,
+      "fat": 20,
+      "calories": 340
+    },
+    "cuisine": "Thai",
+    "cooking_style": "grilled",
+    "flavor_profile": [
+      "savory",
+      "sweet",
+      "nutty"
+    ],
+    "description": "Chicken Satay — a thai dish cooked in grilled style with flavors that are savory, sweet, nutty.",
+    "popularity_score": 0.89,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_082",
+    "name": "Pad Thai",
+    "main_ingredients": [
+      "rice noodles",
+      "shrimp",
+      "peanuts",
+      "tofu"
+    ],
+    "tags": [
+      "family_favorite"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 20,
+      "carbs": 50,
+      "fat": 18,
+      "calories": 442
+    },
+    "cuisine": "Thai",
+    "cooking_style": "stir_fried",
+    "flavor_profile": [
+      "sweet",
+      "sour",
+      "savory"
+    ],
+    "description": "Pad Thai — a thai dish cooked in stir_fried style with flavors that are sweet, sour, savory.",
+    "popularity_score": 0.96,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_083",
+    "name": "Thai Green Curry",
+    "main_ingredients": [
+      "chicken",
+      "coconut milk",
+      "green curry paste"
+    ],
+    "tags": [
+      "spicy",
+      "comfort_food"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 25,
+    "nutrition_facts": {
+      "protein": 28,
+      "carbs": 12,
+      "fat": 25,
+      "calories": 385
+    },
+    "cuisine": "Thai",
+    "cooking_style": "simmered",
+    "flavor_profile": [
+      "creamy",
+      "spicy",
+      "aromatic"
+    ],
+    "description": "Thai Green Curry — a thai dish cooked in simmered style with flavors that are creamy, spicy, aromatic.",
+    "popularity_score": 0.94,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_084",
+    "name": "Tom Yum Soup",
+    "main_ingredients": [
+      "shrimp",
+      "lemongrass",
+      "galangal"
+    ],
+    "tags": [
+      "spicy",
+      "light"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 20,
+    "nutrition_facts": {
+      "protein": 15,
+      "carbs": 10,
+      "fat": 5,
+      "calories": 145
+    },
+    "cuisine": "Thai",
+    "cooking_style": "boiled",
+    "flavor_profile": [
+      "spicy",
+      "sour",
+      "aromatic"
+    ],
+    "description": "Tom Yum Soup — a thai dish cooked in boiled style with flavors that are spicy, sour, aromatic.",
+    "popularity_score": 0.91,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_085",
+    "name": "Massaman Curry",
+    "main_ingredients": [
+      "beef",
+      "potato",
+      "coconut milk",
+      "peanuts"
+    ],
+    "tags": [
+      "rich"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 90,
+    "nutrition_facts": {
+      "protein": 30,
+      "carbs": 25,
+      "fat": 28,
+      "calories": 472
+    },
+    "cuisine": "Thai",
+    "cooking_style": "slow_cooked",
+    "flavor_profile": [
+      "rich",
+      "mildly spicy",
+      "sweet"
+    ],
+    "description": "Massaman Curry — a thai dish cooked in slow_cooked style with flavors that are rich, mildly spicy, sweet.",
+    "popularity_score": 0.87,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_086",
+    "name": "Greek Salad",
+    "main_ingredients": [
+      "cucumber",
+      "tomato",
+      "feta cheese",
+      "olives"
+    ],
+    "tags": [
+      "vegetarian",
+      "gluten_free",
+      "healthy"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 0,
+    "nutrition_facts": {
+      "protein": 8,
+      "carbs": 10,
+      "fat": 20,
+      "calories": 252
+    },
+    "cuisine": "Mediterranean",
+    "cooking_style": "fresh",
+    "flavor_profile": [
+      "fresh",
+      "tangy",
+      "salty"
+    ],
+    "description": "Greek Salad — a mediterranean dish cooked in fresh style with flavors that are fresh, tangy, salty.",
+    "popularity_score": 0.9,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_087",
+    "name": "Hummus",
+    "main_ingredients": [
+      "chickpeas",
+      "tahini",
+      "lemon juice"
+    ],
+    "tags": [
+      "vegan",
+      "gluten_free",
+      "appetizer"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 0,
+    "nutrition_facts": {
+      "protein": 8,
+      "carbs": 25,
+      "fat": 15,
+      "calories": 267
+    },
+    "cuisine": "Mediterranean",
+    "cooking_style": "blended",
+    "flavor_profile": [
+      "creamy",
+      "nutty",
+      "tangy"
+    ],
+    "description": "Hummus — a mediterranean dish cooked in blended style with flavors that are creamy, nutty, tangy.",
+    "popularity_score": 0.95,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_088",
+    "name": "Falafel",
+    "main_ingredients": [
+      "chickpeas",
+      "herbs",
+      "spices"
+    ],
+    "tags": [
+      "vegan",
+      "gluten_free"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 10,
+    "nutrition_facts": {
+      "protein": 12,
+      "carbs": 30,
+      "fat": 18,
+      "calories": 330
+    },
+    "cuisine": "Mediterranean",
+    "cooking_style": "fried",
+    "flavor_profile": [
+      "herby",
+      "crispy",
+      "savory"
+    ],
+    "description": "Falafel — a mediterranean dish cooked in fried style with flavors that are herby, crispy, savory.",
+    "popularity_score": 0.92,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_089",
+    "name": "Chicken Gyro",
+    "main_ingredients": [
+      "chicken",
+      "pita bread",
+      "tzatziki sauce"
+    ],
+    "tags": [
+      "quick_meal"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 28,
+      "carbs": 40,
+      "fat": 18,
+      "calories": 434
+    },
+    "cuisine": "Mediterranean",
+    "cooking_style": "grilled",
+    "flavor_profile": [
+      "savory",
+      "fresh",
+      "creamy"
+    ],
+    "description": "Chicken Gyro — a mediterranean dish cooked in grilled style with flavors that are savory, fresh, creamy.",
+    "popularity_score": 0.93,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_090",
+    "name": "Moussaka",
+    "main_ingredients": [
+      "eggplant",
+      "ground lamb",
+      "bechamel"
+    ],
+    "tags": [
+      "comfort_food"
+    ],
+    "prep_time_min": 30,
+    "cook_time_min": 60,
+    "nutrition_facts": {
+      "protein": 25,
+      "carbs": 20,
+      "fat": 30,
+      "calories": 450
+    },
+    "cuisine": "Mediterranean",
+    "cooking_style": "baked",
+    "flavor_profile": [
+      "rich",
+      "creamy",
+      "savory"
+    ],
+    "description": "Moussaka — a mediterranean dish cooked in baked style with flavors that are rich, creamy, savory.",
+    "popularity_score": 0.86,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_091",
+    "name": "Shakshuka",
+    "main_ingredients": [
+      "eggs",
+      "tomato",
+      "bell peppers",
+      "spices"
+    ],
+    "tags": [
+      "vegetarian",
+      "gluten_free",
+      "one_pan"
+    ],
+    "prep_time_min": 10,
+    "cook_time_min": 20,
+    "nutrition_facts": {
+      "protein": 15,
+      "carbs": 18,
+      "fat": 20,
+      "calories": 312
+    },
+    "cuisine": "Mediterranean",
+    "cooking_style": "simmered",
+    "flavor_profile": [
+      "spicy",
+      "savory",
+      "rich"
+    ],
+    "description": "Shakshuka — a mediterranean dish cooked in simmered style with flavors that are spicy, savory, rich.",
+    "popularity_score": 0.89,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_092",
+    "name": "Pho",
+    "main_ingredients": [
+      "rice noodles",
+      "beef",
+      "beef broth",
+      "herbs"
+    ],
+    "tags": [
+      "gluten_free"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 180,
+    "nutrition_facts": {
+      "protein": 25,
+      "carbs": 45,
+      "fat": 10,
+      "calories": 370
+    },
+    "cuisine": "Vietnamese",
+    "cooking_style": "simmered",
+    "flavor_profile": [
+      "aromatic",
+      "savory",
+      "fresh"
+    ],
+    "description": "Pho — a vietnamese dish cooked in simmered style with flavors that are aromatic, savory, fresh.",
+    "popularity_score": 0.94,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_093",
+    "name": "Banh Mi",
+    "main_ingredients": [
+      "baguette",
+      "pork",
+      "pickled vegetables",
+      "cilantro"
+    ],
+    "tags": [],
+    "prep_time_min": 20,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 22,
+      "carbs": 50,
+      "fat": 18,
+      "calories": 450
+    },
+    "cuisine": "Vietnamese",
+    "cooking_style": "assembled",
+    "flavor_profile": [
+      "savory",
+      "tangy",
+      "fresh",
+      "spicy"
+    ],
+    "description": "Banh Mi — a vietnamese dish cooked in assembled style with flavors that are savory, tangy, fresh, spicy.",
+    "popularity_score": 0.91,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_094",
+    "name": "Paella",
+    "main_ingredients": [
+      "rice",
+      "saffron",
+      "seafood",
+      "chicken"
+    ],
+    "tags": [
+      "family_favorite"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 45,
+    "nutrition_facts": {
+      "protein": 28,
+      "carbs": 65,
+      "fat": 15,
+      "calories": 507
+    },
+    "cuisine": "Spanish",
+    "cooking_style": "simmered",
+    "flavor_profile": [
+      "savory",
+      "aromatic",
+      "rich"
+    ],
+    "description": "Paella — a spanish dish cooked in simmered style with flavors that are savory, aromatic, rich.",
+    "popularity_score": 0.92,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_095",
+    "name": "Gazpacho",
+    "main_ingredients": [
+      "tomato",
+      "cucumber",
+      "bell pepper"
+    ],
+    "tags": [
+      "vegan",
+      "gluten_free",
+      "no_cook"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 0,
+    "nutrition_facts": {
+      "protein": 4,
+      "carbs": 20,
+      "fat": 12,
+      "calories": 204
+    },
+    "cuisine": "Spanish",
+    "cooking_style": "blended",
+    "flavor_profile": [
+      "fresh",
+      "tangy",
+      "chilled"
+    ],
+    "description": "Gazpacho — a spanish dish cooked in blended style with flavors that are fresh, tangy, chilled.",
+    "popularity_score": 0.83,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_096",
+    "name": "Coq au Vin",
+    "main_ingredients": [
+      "chicken",
+      "red wine",
+      "mushrooms",
+      "bacon"
+    ],
+    "tags": [
+      "comfort_food"
+    ],
+    "prep_time_min": 20,
+    "cook_time_min": 90,
+    "nutrition_facts": {
+      "protein": 35,
+      "carbs": 15,
+      "fat": 25,
+      "calories": 425
+    },
+    "cuisine": "French",
+    "cooking_style": "braised",
+    "flavor_profile": [
+      "rich",
+      "savory",
+      "hearty"
+    ],
+    "description": "Coq au Vin — a french dish cooked in braised style with flavors that are rich, savory, hearty.",
+    "popularity_score": 0.88,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_097",
+    "name": "French Onion Soup",
+    "main_ingredients": [
+      "onions",
+      "beef broth",
+      "bread",
+      "gruyere cheese"
+    ],
+    "tags": [
+      "comfort_food"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 60,
+    "nutrition_facts": {
+      "protein": 15,
+      "carbs": 30,
+      "fat": 20,
+      "calories": 360
+    },
+    "cuisine": "French",
+    "cooking_style": "caramelized",
+    "flavor_profile": [
+      "sweet",
+      "savory",
+      "cheesy"
+    ],
+    "description": "French Onion Soup — a french dish cooked in caramelized style with flavors that are sweet, savory, cheesy.",
+    "popularity_score": 0.9,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_098",
+    "name": "Ratatouille",
+    "main_ingredients": [
+      "eggplant",
+      "zucchini",
+      "tomato",
+      "bell peppers"
+    ],
+    "tags": [
+      "vegan",
+      "gluten_free",
+      "healthy"
+    ],
+    "prep_time_min": 25,
+    "cook_time_min": 45,
+    "nutrition_facts": {
+      "protein": 6,
+      "carbs": 25,
+      "fat": 10,
+      "calories": 214
+    },
+    "cuisine": "French",
+    "cooking_style": "baked",
+    "flavor_profile": [
+      "savory",
+      "herby",
+      "light"
+    ],
+    "description": "Ratatouille — a french dish cooked in baked style with flavors that are savory, herby, light.",
+    "popularity_score": 0.85,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_099",
+    "name": "Jollof Rice",
+    "main_ingredients": [
+      "rice",
+      "tomato",
+      "peppers",
+      "spices"
+    ],
+    "tags": [
+      "vegan",
+      "spicy"
+    ],
+    "prep_time_min": 15,
+    "cook_time_min": 40,
+    "nutrition_facts": {
+      "protein": 9,
+      "carbs": 70,
+      "fat": 12,
+      "calories": 424
+    },
+    "cuisine": "African",
+    "cooking_style": "simmered",
+    "flavor_profile": [
+      "smoky",
+      "spicy",
+      "savory"
+    ],
+    "description": "Jollof Rice — a african dish cooked in simmered style with flavors that are smoky, spicy, savory.",
+    "popularity_score": 0.87,
+    "is_active": 1
+  },
+  {
+    "recipe_id": "rec_100",
+    "name": "Kimchi Fried Rice",
+    "main_ingredients": [
+      "rice",
+      "kimchi",
+      "egg",
+      "gochujang"
+    ],
+    "tags": [
+      "spicy",
+      "quick_meal"
+    ],
+    "prep_time_min": 5,
+    "cook_time_min": 15,
+    "nutrition_facts": {
+      "protein": 15,
+      "carbs": 50,
+      "fat": 14,
+      "calories": 386
+    },
+    "cuisine": "Korean",
+    "cooking_style": "stir_fried",
+    "flavor_profile": [
+      "spicy",
+      "tangy",
+      "umami"
+    ],
+    "description": "Kimchi Fried Rice — a korean dish cooked in stir_fried style with flavors that are spicy, tangy, umami.",
+    "popularity_score": 0.93,
+    "is_active": 1
+  }
+]

@@ -1,0 +1,38 @@
+# --------------------------------------------------
+# Posha Git Ignore
+# --------------------------------------------------
+
+# Python / Build Artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.env
+.venv
+venv/
+env/
+
+# Local config files
+*.sqlite3
+*.db
+posha.db
+
+# Logs
+logs/
+*.log
+
+# MacOS junk
+.DS_Store
+*.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment files
+.env
+.env.local
+.env.*
