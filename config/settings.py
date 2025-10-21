@@ -36,8 +36,8 @@ PROMPTS_PATH.mkdir(exist_ok=True)
 PROMPT_PATHS = {
     "preference": PROMPTS_PATH / "preference_v1.txt",
     "planner": PROMPTS_PATH / "planner_v1.txt",
-    "decision": PROMPTS_PATH / "decision_v1.txt",
-}
+    "planner_intent": PROMPTS_PATH / "planner_intent.txt"
+    }
 
 # ------------------------------------------------------------
 # Model Configurations
@@ -59,14 +59,14 @@ AGENT_CONFIGS = {
         "response_mime_type": "application/json",
         "retries": 1,
     },
-    "decision": {
+    "planner_intent": {
         "primary_model": "gemini-2.5-flash",
         "fallback_model": "gemini-2.5-pro",
-        "temperature": 0.0,
-        "max_output_tokens": 1024,
+        "temperature": 0.3,
+        "max_output_tokens": 500,
         "response_mime_type": "application/json",
         "retries": 1,
-    },
+    }
 }
 
 # Toggle prompt/response logging (useful for debugging)

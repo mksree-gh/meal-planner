@@ -88,7 +88,10 @@ def print_pretty_diff(axis: str, changes: Dict[str, Any]):
     for k, v in changes.items():
         ctype = v["change"]
         if ctype == "added":
-            parts.append(f"+{k} ↑{v['new']:.2f}")
+            new_val = v.get("new")
+            if isinstance(new_val, dict):
+                new_val = json.dumps(new_val)
+            parts.append(f"+{k} ↑{new_val}")
         elif ctype == "updated":
             delta = round(v["new"] - v["old"], 3)
             arrow = "↑" if delta > 0 else "↓"

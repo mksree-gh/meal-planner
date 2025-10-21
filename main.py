@@ -21,6 +21,7 @@ from core.memory_layer import MemoryLayer
 from core.error_handler import log_error
 from core.utils import utc_now, generate_id, log_event
 from agents import PreferenceAgent, PlannerAgent
+from agents.planner_intent import PlannerIntentAgent
 
 from typing import Dict, Any
 
@@ -142,6 +143,16 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser("Posha Orchestrator CLI")
     parser.add_argument("--user-id", required=True, help="Unique user ID")
     parser.add_argument("--text", default=None, help="Optional preference text to process directly")
+    parser.add_argument("--chat", default=None, help="(Optional) Conversational follow-up for planner")
+
     args = parser.parse_args()
+
+    if args.chat:
+        planner = PlannerIntentAgent()
+        result = planner.handle_message(args.user_id, args.chat)
+        print(f"\n💬 {result['response']}")
+        if result.get("action") == "regenerate":
+            print("🔁 Plan regenerated.")
+        sys.exit(0)
 
     orchestrate(user_id=args.user_id, user_text=args.text)

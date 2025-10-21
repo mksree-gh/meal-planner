@@ -272,6 +272,7 @@ Now generate a JSON output strictly following the MealPlanOutput schema: 3 days,
         - top_k_candidates: how many recipes to consider from DB before sampling
         Returns a dict with plan metadata and saved plan_id.
         """
+        memory = memory or self.memory
         logger.info("📋 Generating plan for user=%s", user_id)
         run_id = generate_id("run")
         chat_history = []

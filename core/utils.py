@@ -6,6 +6,14 @@ import logging
 from datetime import datetime, timezone
 from pathlib import Path
 
+from core.logging_layer import (
+    log_event,
+    log_session_event,
+    log_summary,
+    print_pretty_diff,
+    log_console_line,
+)
+
 # ----------------------------------------------------------
 # ID + Time helpers
 # ----------------------------------------------------------
@@ -33,32 +41,27 @@ def safe_json(obj):
 LOG_PATH = Path(__file__).resolve().parent.parent / "logs"
 LOG_PATH.mkdir(exist_ok=True)
 
-def log_event(agent: str, message: str, data: dict | None = None):
-    """Append structured log line per agent."""
-    record = {
-        "timestamp": utc_now(),
-        "agent": agent,
-        "message": message,
-        "data": data or {},
-    }
-    logfile = LOG_PATH / f"{agent}.log"
-    with open(logfile, "a", encoding="utf-8") as f:
-        f.write(json.dumps(record, ensure_ascii=False) + "\n")
 
 def log_weight_diff(agent: str, axis: str, before: dict, after: dict, user_id: str = ""):
-    """Quick structured diff for debugging weight evolution."""
+    """Structured + human-readable diff for debugging weight evolution."""
+
     changes = {}
     for k, v in (after or {}).items():
         old = before.get(k)
-        if not old:
+        if old is None:
             changes[k] = {"change": "added", "new": v}
         elif old != v:
-            changes[k] = {"change": "updated", "old": old, "new": v}
+            changes[k] = {"change": "updated", "old": old, "new": v, "delta": round(v - old, 3)}
     for k in (before or {}):
         if k not in (after or {}):
             changes[k] = {"change": "removed", "old": before[k]}
+
     if changes:
+        # Log structured event for traceability
         log_event(agent, "weight_diff", {"user_id": user_id, "axis": axis, "changes": changes})
+        # Print human-readable diff
+        print_pretty_diff(axis, changes)
+
 
 # ----------------------------------------------------------
 # Simple logger setup
@@ -73,5 +76,5 @@ def get_logger(name: str):
     handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
     logger.addHandler(handler)
     logger.setLevel(logging.INFO)
-    
+
     return logger
