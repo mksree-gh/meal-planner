@@ -448,6 +448,41 @@ class MemoryLayer:
         conn.commit()
         conn.close()
 
+    # ----- Session Context Retrieval -----
+    def get_last_session_context(self, user_id: str):
+        """
+        Fetch the last paused or failed run, along with related plan and chat context.
+        """
+        state = self.get_run_state(user_id)
+        if not state or state["status"] not in ("paused", "failed"):
+            return None
+
+        plan_id = state.get("current_plan_id")
+        plan_data = self.get_plan(plan_id) if plan_id else None
+
+        # try to load the last chat history from logs/session_<plan_id>.jsonl
+        chat_log = []
+        if plan_id:
+            log_path = Path(__file__).resolve().parent.parent / "logs" / f"session_{plan_id}.jsonl"
+            if log_path.exists():
+                with open(log_path, "r", encoding="utf-8") as f:
+                    for line in f:
+                        try:
+                            chat_log.append(json.loads(line))
+                        except Exception:
+                            continue
+
+        return {
+            "run_state": state,
+            "plan_data": plan_data,
+            "chat_history": chat_log,
+        }
+
+    def mark_session_resumed(self, run_id: str, user_id: str, plan_id: Optional[str] = None):
+        """Update run_state to mark resumed session."""
+        self.update_run_state(run_id, user_id, stage="resumed", status="in_progress", plan_id=plan_id)
+
+
 
 # ---------------------------------------------------------------------
 # Module-level init -- make it easy to initialize DB when running this file

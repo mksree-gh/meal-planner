@@ -22,12 +22,80 @@ from core.error_handler import log_error
 from core.utils import utc_now, generate_id, log_event
 from agents import PreferenceAgent, PlannerAgent
 
+from typing import Dict, Any
+
+
+def resume_session(user_id: str, ctx: Dict[str, Any], memory: MemoryLayer):
+    """
+    Resume an interrupted session using context from run_state + logs.
+    """
+    plan_data = ctx.get("plan_data")
+    chat_history = ctx.get("chat_history") or []
+    stage = ctx["run_state"].get("stage")
+
+    print(f"\n🔁 Resuming from stage: {stage}")
+
+    if stage == "preference":
+        print("🧠 Last step was updating preferences...")
+        pref_agent = PreferenceAgent()
+        merged_view = pref_agent.process_user_text(user_id, user_text=None)
+        planner = PlannerAgent()
+        planner.generate_plan(user_id, session_text=None, preferences_override=merged_view, memory=memory)
+
+    elif stage == "planning":
+        print("📋 Resuming meal plan generation...")
+        planner = PlannerAgent()
+        last_text = chat_history[-1]["parts"][0]["text"] if chat_history else None
+        planner.generate_plan(user_id, session_text=last_text, memory=memory)
+
+    elif stage == "approval" and plan_data:
+        print("🗒️ You had a pending plan awaiting feedback.")
+        print(f"Plan ID: {plan_data['plan_id']}")
+        print("Would you like to review it again?")
+        choice = input("(r)eview / (a)pprove / (n)ew session: ").strip().lower()
+        if choice == "a":
+            memory.update_plan_status(plan_data["plan_id"], "approved")
+            memory.update_run_state(generate_id("run"), user_id, stage="approval", status="approved", plan_id=plan_data["plan_id"])
+            print("✅ Plan approved and finalized.")
+            return
+        elif choice == "r":
+            planner = PlannerAgent()
+            planner.generate_plan(user_id, session_text="Please revise the previous plan.", memory=memory)
+        else:
+            print("🆕 Starting new session.")
+
+    else:
+        print("❓ Unknown recovery stage. Starting fresh.")
+        orchestrate(user_id)
+
+
 
 def orchestrate(user_id: str, user_text: Optional[str] = None):
     memory = MemoryLayer(DB_PATH)
+
     print("\n👋 Hello! I am Posha's meal planning assistant.")
     print(f"📘 Using database: {DB_PATH}")
 
+    # --- STEP 1: Detect unfinished session ---
+    last_state = memory.get_run_state(user_id)
+    if last_state and last_state["status"] in ("paused", "failed"):
+        print("\n⚠️ Previous session detected.")
+        print(f"   Stage: {last_state.get('stage')} | Status: {last_state.get('status')}")
+        resume_choice = input("Do you want to resume it? (y/n): ").strip().lower()
+        if resume_choice == "y":
+            ctx = memory.get_last_session_context(user_id)
+            if ctx:
+                print("🔄 Resuming previous session...")
+                run_id = generate_id("run")
+                memory.mark_session_resumed(run_id, user_id, plan_id=ctx["run_state"].get("current_plan_id"))
+                return resume_session(user_id, ctx, memory)
+            else:
+                print("⚠️ No valid context found. Starting fresh.")
+        else:
+            print("🆕 Starting a new session.")
+            memory.update_run_state(generate_id("run"), user_id, stage="init", status="new")
+
+    # --- STEP 2: Proceed with normal flow ---
     try:
         while True:
             # Accept user preference text if provided or ask
@@ -56,84 +124,19 @@ def orchestrate(user_id: str, user_text: Optional[str] = None):
             plan_data = planner.generate_plan(user_id=user_id, session_text=user_text, preferences_override=merged_view,memory = memory)
 
             if plan_data == "Exit":
-                print("\n🛑 Exiting as per request.\n")
                 return
-            elif plan_data== "New Session":
-                print("\n🔄 Starting a new session as per request.\n")
-                user_text = None
-                continue
 
-            # # Approval loop - mandatory user decision or explicit exit
-            # while True:
-            #     action = input("Choose action — approve (a), reject (r), regenerate with feedback (g), or exit (e): ").strip().lower()
-            #     if action in ("a", "approve"):
-            #         memory.update_plan_status(plan_data["plan_id"], "approved")
-            #         memory.update_run_state(generate_id("run"), user_id, stage="approval", status="approved", plan_id=plan_data["plan_id"])
-            #         print(f"\n🎉 Plan approved and finalized (plan_id={plan_data['plan_id']}).\n")
-            #         log_event("orchestrator", "plan_approved", {"user_id": user_id, "plan_id": plan_data["plan_id"], "timestamp": utc_now()})
-            #         return
-            #     elif action in ("r", "reject"):
-            #         reason = input("💬 Why are you rejecting this plan?\n> ").strip() or "User rejected without reason"
-            #         memory.update_plan_status(plan_data["plan_id"], "rejected", reason)
-            #         memory.update_run_state(generate_id("run"), user_id, stage="approval", status="rejected", plan_id=plan_data["plan_id"])
-            #         # append rejection history with dedupe (simple check)
-            #         profile = memory.get_profile(user_id) or {}
-            #         old_hist = profile.get("rejection_history_json", []) or []
-            #         new_entry = {"plan_id": plan_data["plan_id"], "reason": reason, "timestamp": utc_now()}
-            #         # dedupe by (plan_id, reason)
-            #         if not any(e.get("plan_id") == new_entry["plan_id"] and e.get("reason") == new_entry["reason"] for e in old_hist):
-            #             old_hist.append(new_entry)
-            #         memory.upsert_profile(
-            #             user_id=user_id,
-            #             name=profile.get("name", "user"),
-            #             preferences=profile.get("preferences_json", {}) or {},
-            #             source="orchestrator",
-            #             profile_version=(profile.get("profile_version", 0) or 0) + 1,
-            #             weightages=profile.get("weightages_json", {}) or {},
-            #             session_overlay=profile.get("session_overlay_json", {}) or {},
-            #             rejection_history=old_hist,
-            #         )
-            #         print(f"\n❌ Plan rejected. Feedback saved: “{reason}”\n")
-            #         # Ask whether to regenerate immediately
-            #         retry = input("🔁 Would you like me to try again with that feedback? (y/n): ").strip().lower()
-            #         if retry in ("y", "yes"):
-            #             feedback_text = f"Please revise the plan. Avoid / change: {reason}"
-            #             # regenerate, loop back into outer while to create a new plan with feedback
-            #             user_text = feedback_text
-            #             break  # break inner loop and regenerate
-            #         else:
-            #             # ask whether to exit or continue with new preference
-            #             cont = input("Do you want to continue (c) with new preferences, or exit (e)? ").strip().lower()
-            #             if cont in ("e", "exit"):
-            #                 print("\n🛑 Ending session. You can rerun later to continue.\n")
-            #                 return
-            #             else:
-            #                 # allow user to type new preferences next loop
-            #                 user_text = None
-            #                 break
-            #     elif action in ("g", "regenerate"):
-            #         feedback_text = input("Enter concise feedback for regeneration (e.g., 'more American, less Indian'):\n> ").strip()
-            #         if not feedback_text:
-            #             print("No feedback entered, aborting regeneration request.")
-            #             continue
-            #         user_text = f"Previous_requests: {user_text} \n feedback: {feedback_text}"
-            #         break  # break inner loop to regenerate outside
-            #     elif action in ("e", "exit"):
-            #         print("\n🛑 Exiting per user request.\n")
-            #         return
-            #     else:
-            #         print("Unknown action. Please enter 'a' (approve), 'r' (reject), 'g' (regenerate), or 'e' (exit).")
-            # outer while continues to generate new plan with updated user_text or merged_view
     except KeyboardInterrupt:
-        print("\n⚠️ Interrupted by user.")
-        memory.update_run_state(generate_id("run"), user_id, stage="interrupted", status="paused")
-        sys.exit(1)
+        print("\n⚠️ Interrupted by user. Saving session state...")
+        memory.update_run_state(generate_id("run"), user_id, stage="planning", status="paused")
+        print("💾 Session paused. You can resume later.")
+        sys.exit(0)
+
     except Exception as e:
         print(f"\n💥 Error: {e}")
         log_error(generate_id("run"), "orchestrator", "main_flow", str(e))
-        memory.update_run_state(generate_id("run"), user_id, stage="error", status="failed", error_message=str(e))
+        memory.update_run_state(generate_id("run"), user_id, stage="planning", status="failed", error_message=str(e))
         sys.exit(1)
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser("Posha Orchestrator CLI")

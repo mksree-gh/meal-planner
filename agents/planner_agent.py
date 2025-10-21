@@ -151,7 +151,6 @@ class PlannerAgent:
         """
         base_prompt = self.prompt_path.read_text(encoding="utf-8")
 
-        session = session_text or "No immediate session request provided."
         prefs = json.dumps(merged_view.get("base_preferences", {}), indent=2, ensure_ascii=False)
         weights = json.dumps(merged_view.get("weightages", {}), indent=2, ensure_ascii=False)
         overlay = json.dumps(merged_view.get("session_overlay", {}), indent=2, ensure_ascii=False)
@@ -277,13 +276,12 @@ Now generate a JSON output strictly following the MealPlanOutput schema: 3 days,
         run_id = generate_id("run")
         chat_history = []
         chat_history.append({"role":"user","parts":[{"text": session_text or "No immediate session request provided."}]})
-        prefrence_already_loaded = True
+        preference_already_loaded = True
         feedback_text = None
-
 
         while True:
             # Load user profile and merged view
-            if not prefrence_already_loaded:
+            if not preference_already_loaded:
                 if feedback_text:
                     print("\n🧠 Updating preferences...")
                     pref_agent = PreferenceAgent()
@@ -414,10 +412,16 @@ Now generate a JSON output strictly following the MealPlanOutput schema: 3 days,
                     print(f"    • {meal}")
             print(f"\n💡 Rationale: {rationale}\n")
 
-            action = input("Let us know if like the plan (Enter A) or tell us if you want any changes, Press R to reject or Enter E to exit the session: ").strip().lower()
+            action = input(
+        "Let us know if you like the plan (Enter A), "
+        "want to request changes (type feedback), "
+        "press R to reject, or Enter E to exit: ").strip().lower()
+
             feedback_text = None
+            run_id = generate_id("run")
 
             if action in ("a", "approve"):
+                # --- APPROVE ---
 
                 log_event("planner", "plan_approved", {
                     "user_id": user_id,
@@ -426,62 +430,47 @@ Now generate a JSON output strictly following the MealPlanOutput schema: 3 days,
                 })
 
                 memory.update_plan_status(plan_id, "approved")
-                memory.update_run_state(generate_id("run"), user_id, stage="approval", status="approved", plan_id=plan_id)
+                memory.update_run_state(run_id, user_id, stage="approval", status="approved", plan_id=plan_id)
+
                 print(f"\n🎉 Plan approved and finalized (plan_id={plan_id}).\n")
-                log_event("orchestrator", "plan_approved", {"user_id": user_id, "plan_id": plan_id, "timestamp": utc_now()})
                 return "Exit" 
+            
             elif action in ("r", "reject"):
-
+                # --- REJECT ---
                 reason = input("💬 Why are you rejecting this plan?\n> ").strip()
-
                 if not reason:
-                    reason = "Rejected without no reason provided."
+                    reason = "Rejected without a reason provided."
 
-                # Unified rejection recording
                 memory.append_rejection(user_id, plan_id, reason)
-
                 memory.update_run_state(generate_id("run"), user_id, stage="approval", status="rejected", plan_id=plan_id)
+
                 print(f"\n❌ Plan rejected. Feedback saved: “{reason}”\n")
 
-                # Ask whether to regenerate immediately
-                retry = input("🔁 Would you like me to try again with that feedback? (y/n): ").strip().lower()
-                if retry in ("y", "yes"):
-                    feedback_text = f"Please revise the plan. Avoid / change: {reason}"
+                feedback_text = f"Please revise the plan. Avoid / change: {reason}"
 
-                    log_event("planner", "feedback_cycle", {
+                log_event("planner", "feedback_cycle", {
                         "user_id": user_id,
                         "previous_plan_id": plan_id,
                         "feedback": reason,
                         "timestamp": utc_now(),
                     })
 
-                else:
-                    cont = input("Do you want to continue (c) with new preferences, or exit (e)? ").strip().lower()
-                    if cont in ("e", "exit"):
-                        print("\n🛑 Ending session. You can rerun later to continue.\n")
-                        return "Exit"
-                    else:
-                        return "New Session"
-
-                
-            elif action in ("g", "regenerate"):
-                feedback_text = input("Enter concise feedback for regeneration (e.g., 'more American, less Indian'):\n> ").strip()
-                if not feedback_text:
-                    print("No feedback entered, aborting regeneration request.")
-                    return "Exit"
-                # user_text = f"Previous_requests: {user_text} \n feedback: {feedback_text}"
-                # break  # break inner loop to regenerate outside
             elif action in ("e", "exit"):
+                # --- EXIT ---
                 print("\n🛑 Exiting per user request.\n")
                 return "Exit"
+            
             else:
+                # --- FREE TEXT FEEDBACK ---
+                if not action:
+                    print("\n⚠️ No feedback provided, exiting.\n")
+                    return "Exit"
                 feedback_text = action
 
-            if feedback_text==None:
-                return "Exit"
-            else:
-                chat_history.append({"role":"user","parts":[{"text": feedback_text}]})
-                prefrence_already_loaded = False
+            
+            # --- CONTINUE LOOP WITH FEEDBACK ---
+            chat_history.append({"role":"user","parts":[{"text": feedback_text}]})
+            preference_already_loaded = False
 
 
 # ------------------------------
