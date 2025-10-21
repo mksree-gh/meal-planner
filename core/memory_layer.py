@@ -186,8 +186,19 @@ class MemoryLayer:
             merged_prefs = {**existing_prefs, **(preferences or {})}
             merged_weights = {**existing_weights, **(weightages or {})}
             merged_overlay = (session_overlay or existing_overlay)
-            merged_rejections = (existing_rejections or []) + (rejection_history or [])
             new_version = (existing.get("profile_version") or 0) + 1
+
+            # Only merge if explicit new rejections were passed
+            if rejection_history:
+                existing = existing_rejections or []
+                new_unique = [
+                    r for r in rejection_history
+                    if not any(e.get("plan_id") == r.get("plan_id") and e.get("reason") == r.get("reason") for e in existing)
+                ]
+                merged_rejections = existing + new_unique
+            else:
+                merged_rejections = existing_rejections or []
+
         else:
             merged_prefs = preferences or {}
             merged_weights = weightages or {}
@@ -361,6 +372,67 @@ class MemoryLayer:
             )
         conn.commit()
         conn.close()
+
+    # ----- Unified Rejection Recording -----
+    def append_rejection(self, user_id: str, plan_id: str, reason: str, metadata: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
+        """
+        Record a rejection consistently:
+        - Deduplicate by (plan_id, reason)
+        - Update both 'plans' and 'profiles'
+        - Log structured event to logs/session_*.jsonl
+        """
+        timestamp = utc_now()
+        conn = self._connect()
+        cur = conn.cursor()
+
+        # --- 1. Update plan record ---
+        cur.execute("""
+            UPDATE plans
+            SET status = 'rejected',
+                rejection_reason = ?,
+                updated_at = ?
+            WHERE plan_id = ?
+        """, (reason, timestamp, plan_id))
+
+        # --- 2. Fetch existing profile history ---
+        cur.execute("SELECT rejection_history_json, name FROM profiles WHERE user_id = ?", (user_id,))
+        row = cur.fetchone()
+        history = []
+        name = "user"
+        if row:
+            history = from_json(row["rejection_history_json"])
+            name = row["name"]
+
+        # --- 3. Add new entry if not duplicate ---
+        new_entry = {"plan_id": plan_id, "reason": reason, "metadata": metadata or {}, "timestamp": timestamp}
+        already_exists = any(
+            e.get("plan_id") == plan_id and e.get("reason") == reason for e in (history or [])
+        )
+        if not already_exists:
+            history.append(new_entry)
+
+        # --- 4. Update profile record ---
+        cur.execute("""
+            UPDATE profiles
+            SET rejection_history_json = ?, updated_at = ?
+            WHERE user_id = ?
+        """, (to_json(history), timestamp, user_id))
+
+        conn.commit()
+        conn.close()
+
+        # --- 5. Structured log ---
+        log_session_event({
+            "event": "plan_rejected",
+            "user_id": user_id,
+            "plan_id": plan_id,
+            "reason": reason,
+            "metadata": metadata or {},
+            "timestamp": timestamp,
+        }, plan_id)
+
+        return history
+    
 
     # ----- Errors -----
     def log_error(self, run_id: str, step: str, summary: str, hint: str = ""):

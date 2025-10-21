@@ -57,18 +57,6 @@ CREATE TABLE IF NOT EXISTS plans (
 );
 
 -- ----------------------------------------------------------
--- REJECTIONS
--- Separate table for feedback → drives adaptive updates.
--- ----------------------------------------------------------
-CREATE TABLE IF NOT EXISTS rejections (
-    rejection_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id TEXT,
-    plan_id TEXT,
-    feedback_json TEXT,           -- structured feedback like {"reason":"too spicy"}
-    timestamp TEXT
-);
-
--- ----------------------------------------------------------
 -- RUN STATE
 -- Tracks progress, enables pause/resume.
 -- ----------------------------------------------------------

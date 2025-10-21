@@ -7,7 +7,6 @@ PlannerAgent — selects candidate recipes and asks an LLM to produce a 3-day,
 """
 
 import json
-import logging
 import random
 import time
 from typing import Any, Dict, List, Optional, Tuple
@@ -24,6 +23,7 @@ from core.reasoning import (
     score_recipe_by_preferences,
 )
 from core.utils import utc_now, generate_id, log_event, safe_json, get_logger
+from core.logging_layer import log_event, log_summary, log_console_line
 from core.error_handler import log_error
 from agents import PreferenceAgent
 
@@ -379,14 +379,30 @@ Now generate a JSON output strictly following the MealPlanOutput schema: 3 days,
             # store the plan_json (structure) and rationale
             self.memory.save_plan(user_id, plan_id, plan_json, rationale, created_at)
 
-            # Log event
+            # Log structured event
             event = {
                 "user_id": user_id,
                 "plan_id": plan_id,
                 "candidate_count": len(sampled),
                 "created_at": created_at,
+                "days": len(plan_json.get("plan", []))
             }
             log_event(self.agent_name, "plan_generated", event)
+            log_console_line(f"{self.agent_name}: {user_id} -> {event}")
+            
+            # Human-readable markdown summary
+            meals_summary = "\n".join(
+                [f"- **{day['day']}**: {', '.join(day['meals'])}" for day in plan_json.get("plan", [])]
+            )
+            summary_text = f"""
+| ## 📋 Meal Plan — {user_id}
+| **Plan ID:** {plan_id}
+| **Candidates:** {len(sampled)}  
+| **Rationale:** {rationale[:200]}...
+
+{meals_summary}
+            """
+            log_summary(user_id, "planner", summary_text)
 
             logger.info("✅ Plan %s generated for %s", plan_id, user_id)
             print("✅ Draft meal plan created.\n")
@@ -400,51 +416,54 @@ Now generate a JSON output strictly following the MealPlanOutput schema: 3 days,
 
             action = input("Let us know if like the plan (Enter A) or tell us if you want any changes, Press R to reject or Enter E to exit the session: ").strip().lower()
             feedback_text = None
+
             if action in ("a", "approve"):
+
+                log_event("planner", "plan_approved", {
+                    "user_id": user_id,
+                    "plan_id": plan_id,
+                    "timestamp": utc_now(),
+                })
+
                 memory.update_plan_status(plan_id, "approved")
                 memory.update_run_state(generate_id("run"), user_id, stage="approval", status="approved", plan_id=plan_id)
                 print(f"\n🎉 Plan approved and finalized (plan_id={plan_id}).\n")
                 log_event("orchestrator", "plan_approved", {"user_id": user_id, "plan_id": plan_id, "timestamp": utc_now()})
                 return "Exit" 
             elif action in ("r", "reject"):
-                reason = input("💬 Why are you rejecting this plan?\n> ").strip() or "User rejected without reason"
-                memory.update_plan_status(plan_id, "rejected", reason)
+
+                reason = input("💬 Why are you rejecting this plan?\n> ").strip()
+
+                if not reason:
+                    reason = "Rejected without no reason provided."
+
+                # Unified rejection recording
+                memory.append_rejection(user_id, plan_id, reason)
+
                 memory.update_run_state(generate_id("run"), user_id, stage="approval", status="rejected", plan_id=plan_id)
-                # append rejection history with dedupe (simple check)
-                profile = memory.get_profile(user_id) or {}
-                old_hist = profile.get("rejection_history_json", []) or []
-                new_entry = {"plan_id": plan_id, "reason": reason, "timestamp": utc_now()}
-                # dedupe by (plan_id, reason)
-                if not any(e.get("plan_id") == new_entry["plan_id"] and e.get("reason") == new_entry["reason"] for e in old_hist):
-                    old_hist.append(new_entry)
-                memory.upsert_profile(
-                    user_id=user_id,
-                    name=profile.get("name", "user"),
-                    preferences=profile.get("preferences_json", {}) or {},
-                    source="orchestrator",
-                    profile_version=(profile.get("profile_version", 0) or 0) + 1,
-                    weightages=profile.get("weightages_json", {}) or {},
-                    session_overlay=profile.get("session_overlay_json", {}) or {},
-                    rejection_history=old_hist,
-                )
                 print(f"\n❌ Plan rejected. Feedback saved: “{reason}”\n")
+
                 # Ask whether to regenerate immediately
                 retry = input("🔁 Would you like me to try again with that feedback? (y/n): ").strip().lower()
                 if retry in ("y", "yes"):
                     feedback_text = f"Please revise the plan. Avoid / change: {reason}"
-                    # regenerate, loop back into outer while to create a new plan with feedback
-                    # user_text = feedback_text
-                    # break  # break inner loop and regenerate
+
+                    log_event("planner", "feedback_cycle", {
+                        "user_id": user_id,
+                        "previous_plan_id": plan_id,
+                        "feedback": reason,
+                        "timestamp": utc_now(),
+                    })
+
                 else:
-                    # ask whether to exit or continue with new preference
                     cont = input("Do you want to continue (c) with new preferences, or exit (e)? ").strip().lower()
                     if cont in ("e", "exit"):
                         print("\n🛑 Ending session. You can rerun later to continue.\n")
                         return "Exit"
                     else:
-                        # allow user to type new preferences next loop
-                        user_text = None
                         return "New Session"
+
+                
             elif action in ("g", "regenerate"):
                 feedback_text = input("Enter concise feedback for regeneration (e.g., 'more American, less Indian'):\n> ").strip()
                 if not feedback_text:
@@ -463,14 +482,6 @@ Now generate a JSON output strictly following the MealPlanOutput schema: 3 days,
             else:
                 chat_history.append({"role":"user","parts":[{"text": feedback_text}]})
                 prefrence_already_loaded = False
-        # return {
-        #     "plan_id": plan_id,
-        #     "user_id": user_id,
-        #     "status": "draft",
-        #     "plan_json": plan_json,
-        #     "rationale": rationale,
-        #     "created_at": created_at,
-        # }
 
 
 # ------------------------------

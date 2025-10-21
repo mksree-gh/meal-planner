@@ -45,14 +45,33 @@ def log_event(agent: str, message: str, data: dict | None = None):
     with open(logfile, "a", encoding="utf-8") as f:
         f.write(json.dumps(record, ensure_ascii=False) + "\n")
 
+def log_weight_diff(agent: str, axis: str, before: dict, after: dict, user_id: str = ""):
+    """Quick structured diff for debugging weight evolution."""
+    changes = {}
+    for k, v in (after or {}).items():
+        old = before.get(k)
+        if not old:
+            changes[k] = {"change": "added", "new": v}
+        elif old != v:
+            changes[k] = {"change": "updated", "old": old, "new": v}
+    for k in (before or {}):
+        if k not in (after or {}):
+            changes[k] = {"change": "removed", "old": before[k]}
+    if changes:
+        log_event(agent, "weight_diff", {"user_id": user_id, "axis": axis, "changes": changes})
+
 # ----------------------------------------------------------
 # Simple logger setup
 # ----------------------------------------------------------
 def get_logger(name: str):
     logger = logging.getLogger(name)
-    if not logger.handlers:
-        handler = logging.StreamHandler()
-        handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
-        logger.addHandler(handler)
-        logger.setLevel(logging.INFO)
+
+    if logger.hasHandlers():
+        logger.handlers.clear()
+
+    handler = logging.StreamHandler()
+    handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
+    logger.addHandler(handler)
+    logger.setLevel(logging.INFO)
+    
     return logger

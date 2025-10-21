@@ -7,7 +7,6 @@ the user's preference profile in structured form.
 """
 
 import json
-import logging
 import time
 from typing import Dict, Any, Optional
 
@@ -19,17 +18,15 @@ from config import get_agent_config, get_prompt_path, DB_PATH
 from core.memory_layer import MemoryLayer, log_session_event
 from core.reasoning import (
     merge_preferences,
+    merge_base_preferences,
     update_weights,
     create_session_overlay,
 )
-from core.utils import utc_now, generate_id, log_event, safe_json
+from core.utils import utc_now, generate_id, log_event, safe_json, log_weight_diff, get_logger
+from core.logging_layer import log_summary, log_console_line
 from core.error_handler import log_error
 
-logger = logging.getLogger("preference_agent")
-logger.setLevel(logging.INFO)
-handler = logging.StreamHandler()
-handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
-logger.addHandler(handler)
+logger = get_logger("PreferenceAgent")
 
 # --- Helper normalizer ---
 def _normalize_axes(d: Dict[str, Any]) -> Dict[str, Any]:
@@ -42,10 +39,14 @@ def _normalize_axes(d: Dict[str, Any]) -> Dict[str, Any]:
         if isinstance(val, dict):
             normalized = {}
             for k, v in val.items():
+                if isinstance(v, dict):
+                    # try to extract numeric field if nested
+                    numeric_candidates = [vv for vv in v.values() if isinstance(vv, (int, float))]
+                    v = numeric_candidates[0] if numeric_candidates else v
                 try:
                     fv = float(v)
                 except Exception:
-                    fv = 0.0
+                    continue
                 normalized[str(k).lower()] = max(0.0, min(1.0, fv))
             out[str(axis).lower()] = normalized
         else:
@@ -84,8 +85,6 @@ class PreferenceAgent:
 
         # Call LLM (primary -> fallback)
         parsed_raw = self._call_llm(prompt)
-
-        # print(f"\n\nParsed Raw from LLM: {parsed_raw}\n\n")
 
         # Log raw LLM response (truncated)
         log_session_event({"run_id": run_id, "agent": self.agent_name, "phase": "llm_response", "response": safe_json(parsed_raw)[:4000]})
@@ -138,23 +137,23 @@ class PreferenceAgent:
         profile = self.memory.get_profile(user_id) or {}
         existing_prefs = profile.get("preferences_json", {}) or {}
         existing_weights = profile.get("weightages_json", {}) or {}
-        print("\n\nDebug Info:")
-        print(f"Existing Weights: {existing_weights}")
 
-        # Merge weights axis-wise (existing_weights can be nested; update per axis)
-        merged_weights = dict(existing_weights or {})
+        # Extract only the base_preferences from the merged view
+        if "base_preferences" in existing_prefs:
+            existing_base_prefs = existing_prefs["base_preferences"]
+        else:
+            existing_base_prefs = existing_prefs
+
+        # --- Merge weights per axis (with recency/timestamp support) ---
+        merged_weights = {}
         for axis, deltas in normalized_weightages.items():
-            axis_existing = merged_weights.get(axis, {}) or {}
-            merged_axis = update_weights(axis_existing, deltas)
-            merged_weights[axis] = merged_axis
+            existing_axis = existing_weights.get(axis, {}) or {}
+            merged_weights[axis] = update_weights(existing_axis, deltas)
+            log_weight_diff(self.agent_name, axis, existing_axis, merged_weights[axis], user_id)
 
-        print(f"Merged Weights: {merged_weights}\n\n")
-
-        # Merge base preferences (structured.base_preferences can contain diet/allergens/dislikes/goals)
-        base_prefs_from_llm = structured.base_preferences or {}
-        # normalize base_prefs keys and lower-case lists (where applicable)
+        # --- Merge base preferences intelligently (union lists) ---
         normalized_base = {}
-        for k, v in base_prefs_from_llm.items():
+        for k, v in (structured.base_preferences or {}).items():
             if isinstance(v, list):
                 normalized_base[k] = [str(x).lower() for x in v]
             elif isinstance(v, str):
@@ -162,20 +161,18 @@ class PreferenceAgent:
             else:
                 normalized_base[k] = v
 
-        # Produce merged_view (for planner and UI)
-        merged_view = merge_preferences(existing_prefs, merged_weights, merged_overlay, now_iso=utc_now())
-        # Ensure the base_preferences part is updated with new base prefs
-        # (we'll merge normalized_base into merged_view.base_preferences)
-        merged_view_base = dict(merged_view.get("base_preferences") or {})
-        merged_view_base.update(normalized_base)
-        merged_view["base_preferences"] = merged_view_base
+        merged_base = merge_base_preferences(existing_base_prefs, normalized_base)
+
+        # --- Combine full merged view ---
+        merged_view = merge_preferences(merged_base, merged_weights, merged_overlay, now_iso=utc_now())
+
 
         # Persist to DB: pass explicit blobs to upsert_profile so memory_layer stores cleanly
         profile_version = (profile.get("profile_version", 0) or 0) + 1
-        upserted = self.memory.upsert_profile(
+        self.memory.upsert_profile(
             user_id=user_id,
             name=profile.get("name", "user"),
-            preferences=merged_view_base,
+            preferences=merged_view,
             source=self.agent_name,
             profile_version=profile_version,
             updated_at=utc_now(),
@@ -184,19 +181,54 @@ class PreferenceAgent:
             rejection_history=profile.get("rejection_history_json", []) or [],
         )
 
-        # Log session event (structured)
+        # --- Structured log ---
         event = {
             "run_id": run_id,
             "user_id": user_id,
             "agent": self.agent_name,
             "input_text": user_text,
-            "llm_parsed": safe_json(parsed_raw),
             "merged_view": merged_view,
             "timestamp": utc_now(),
         }
         log_event(self.agent_name, "preference_update", event)
+        log_console_line(f"{self.agent_name}: {user_id} -> {event}")
 
+        # --- Human summary for developer trace ---
+        summary_lines = []
+        for axis, new_axis in merged_weights.items():
+            diffs = []
+            old_axis = existing_weights.get(axis, {})
+            for k, new_val in new_axis.items():
+                old_val = old_axis.get(k)
+                try:
+                    new_f = float(new_val) if not isinstance(new_val, dict) else None
+                    old_f = float(old_val) if not isinstance(old_val, dict) else None
+                except Exception:
+                    new_f, old_f = None, None
+
+                # Case 1: new numeric only
+                if old_val is None and new_f is not None:
+                    diffs.append(f"+{k} ↑{new_f:.2f}")
+                # Case 2: both numeric
+                elif old_f is not None and new_f is not None and old_f != new_f:
+                    delta = new_f - old_f
+                    sym = "↑" if delta > 0 else "↓"
+                    diffs.append(f"{k} {sym}{abs(delta):.2f}")
+                # Case 3: complex nested dicts or invalid data
+                elif isinstance(new_val, dict):
+                    diffs.append(f"{k} [complex update]")
+            if diffs:
+                summary_lines.append(f"⚖️ **{axis}**: {', '.join(diffs)}")
+
+        summary_text = f"""
+| ### 🧠 Preference Update — {user_id}
+| **Input:** {user_text}
+| {chr(10).join(summary_lines) or 'No notable weight changes.'}
+| ✅ Profile version {profile_version}
+"""
+        log_summary(user_id, "preference", summary_text)
         logger.info("✅ Preferences updated successfully for %s", user_id)
+
         return merged_view
 
     def _build_prompt(self, user_text: str) -> str:

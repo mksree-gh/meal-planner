@@ -83,28 +83,96 @@ def decay_weights(weights: Dict[str, float], decay: float = DEFAULT_DECAY) -> Di
     return {k: _clamp(v * decay) for k, v in weights.items()}
 
 
+
+
 def update_weights(
-    existing: Dict[str, float],
-    deltas: Dict[str, float],
+    existing: dict[str, Any],
+    deltas: dict[str, float],
     learning_rate: float = 0.5,
-    normalize: bool = True,
-) -> Dict[str, float]:
+    recency_half_life_days: int = 14,
+    category_type: str = "generic",  # e.g., "cuisine", "diet", "allergen"
+) -> dict[str, Any]:
     """
-    Merge 'deltas' into 'existing' using a simple additive update:
-      new = existing * (1 - lr) + delta * lr
-    - existing: current weights (0..1)
-    - deltas: new signals (0..1), expected same keyspace (missing keys considered 0)
-    - learning_rate: how strongly to accept deltas (0..1)
-    Returns normalized (optional) dictionary.
+    Merge new weight signals into existing ones using:
+      • adaptive learning rate based on recency
+      • controlled decay (category-aware)
+      • recency bias for latest preference
+      • no normalization (absolute preferences allowed)
+
+    Args:
+        existing: current stored weights (with 'value' and 'last_updated')
+        deltas: new preference values (0.0–1.0)
+        learning_rate: how fast to adapt to new input (default 0.5)
+        recency_half_life_days: how long before preference halves naturally
+        category_type: used to adjust decay (e.g. 'diet' = low decay)
+
+    Example:
+        {"italian": {"value": 0.8, "last_updated": "2025-10-20T14:32:00Z"}}
     """
-    out = dict(existing or {})
-    for k, dv in (deltas or {}).items():
-        old = _clamp(out.get(k, 0.0))
-        delta_v = _clamp(dv)
-        out[k] = _clamp(old * (1.0 - learning_rate) + delta_v * learning_rate)
-    if normalize:
-        return normalize_weights(out)
+
+    from datetime import datetime, timezone
+
+    now = datetime.now(timezone.utc)
+    out: dict[str, Any] = {}
+
+    # --- 1. Normalize existing structure ---
+    for k, v in (existing or {}).items():
+        if isinstance(v, dict) and "value" in v:
+            out[k] = {
+                "value": float(v["value"]),
+                "last_updated": v.get("last_updated", now.isoformat().replace("+00:00", "Z")),
+            }
+        else:
+            out[k] = {"value": float(v), "last_updated": now.isoformat().replace("+00:00", "Z")}
+
+    # --- 2. Apply category-aware recency decay ---
+    decay_modifiers = {
+        "cuisine": 1.0,    # decays normally
+        "diet": 0.1,       # almost stable
+        "allergen": 0.0,   # no decay at all
+        "generic": 1.0,
+    }
+    decay_factor_base = decay_modifiers.get(category_type, 1.0)
+
+    for k, meta in list(out.items()):
+        try:
+            t_prev = datetime.fromisoformat(meta["last_updated"].replace("Z", "+00:00"))
+            age_days = (now - t_prev).days
+            # half-life formula
+            decay_factor = (0.5 ** (age_days / recency_half_life_days)) ** decay_factor_base
+            meta["value"] *= decay_factor
+        except Exception:
+            pass  # ignore invalid timestamps
+
+    # --- 3. Merge incoming deltas with adaptive learning ---
+    for key, delta_val in (deltas or {}).items():
+        delta_val = max(0.0, min(1.0, float(delta_val)))
+        prev_meta = out.get(key, {"value": 0.0, "last_updated": now.isoformat().replace("+00:00", "Z")})
+        prev_val = prev_meta["value"]
+
+        # dynamic learning rate: boost if last update was long ago
+        try:
+            t_prev = datetime.fromisoformat(prev_meta["last_updated"].replace("Z", "+00:00"))
+            age_days = (now - t_prev).days
+            recency_boost = 1.0 + min(1.0, age_days / recency_half_life_days)
+        except Exception:
+            recency_boost = 1.0
+        lr = learning_rate * recency_boost
+
+        merged_val = prev_val * (1 - lr) + delta_val * lr
+        out[key] = {
+            "value": round(max(0.0, min(1.0, merged_val)), 3),
+            "last_updated": now.isoformat().replace("+00:00", "Z"),
+        }
+
+    # --- 4. Recency bias: boost the latest updated preference slightly ---
+    if deltas:
+        latest_key = list(deltas.keys())[-1]
+        if latest_key in out:
+            out[latest_key]["value"] = round(min(1.0, out[latest_key]["value"] * 1.15), 3)
+
     return out
+
 
 # -------------------------
 # Preference merging
@@ -146,6 +214,26 @@ def merge_preferences(
     }
     return merged
 
+def merge_base_preferences(existing: dict[str, Any], new: dict[str, Any]) -> dict[str, Any]:
+    """
+    Combine long-term base preferences.
+    - Union additive lists (allergens, dislikes, goals)
+    - Replace diet if explicitly changed
+    - Lower-case everything
+    """
+    merged = dict(existing or {})
+    for k, v in (new or {}).items():
+        if isinstance(v, list):
+            existing_vals = [str(x).lower() for x in merged.get(k, [])]
+            merged[k] = sorted(set(existing_vals + [str(x).lower() for x in v]))
+        elif k == "diet":
+            if v and v.lower() != merged.get("diet"):
+                merged[k] = v.lower()
+        else:
+            merged[k] = v
+    return merged
+
+
 # -------------------------
 # Session overlay helpers
 # -------------------------
@@ -170,25 +258,6 @@ def create_session_overlay(
     overlay["created_at"] = utc_now()
     return overlay
 
-# -------------------------
-# Rejection handling
-# -------------------------
-def record_rejection(
-    rejection_history: List[Dict[str, Any]] | None,
-    plan_id: str,
-    reason: str,
-    metadata: Dict[str, Any] | None = None,
-    timestamp_iso: str | None = None,
-) -> List[Dict[str, Any]]:
-    """
-    Append a structured rejection entry to rejection_history (list) and return new list.
-    metadata can include which cuisines were disliked or other structured fields.
-    """
-    ts = timestamp_iso or utc_now()
-    entry = {"plan_id": plan_id, "reason": reason, "metadata": metadata or {}, "timestamp": ts}
-    out = list(rejection_history or [])
-    out.append(entry)
-    return out
 
 # -------------------------
 # Simple scoring helper
