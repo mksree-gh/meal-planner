@@ -1,4 +1,4 @@
-# agents/planner_agent.py (REFACTORED)
+# agents/planner_agent.py
 
 """
 PlannerAgent — Refactored to work with Streamlit's stateless architecture.
@@ -164,6 +164,8 @@ class PlannerAgent:
             })
         recipes_text = json.dumps(snippets, indent=2, ensure_ascii=False)
 
+        print(chat_history)
+
         instruction = f"""{base_prompt}
 
 === Persistent Preferences (base) ===
@@ -237,7 +239,8 @@ Now generate a JSON output strictly following the MealPlanOutput schema: 3 days,
         user_message: str,
         chat_history: List[Dict[str, Any]],
         preferences_override: Optional[Dict[str, Any]] = None,
-        memory: Optional[MemoryLayer] = None
+        memory: Optional[MemoryLayer] = None,       
+        run_id: str = None,
     ) -> PlannerResult:
         """
         Single step of plan generation - called once per user message.
@@ -254,7 +257,7 @@ Now generate a JSON output strictly following the MealPlanOutput schema: 3 days,
             PlannerResult with status and next action
         """
         memory = memory or self.memory
-        run_id = generate_id("run")
+        # run_id = generate_id("run")
         
         try:
             # Load or use override preferences
@@ -288,7 +291,7 @@ Now generate a JSON output strictly following the MealPlanOutput schema: 3 days,
                     "run_id": run_id, 
                     "agent": self.agent_name, 
                     "phase": "prompt", 
-                    "prompt": str(chat_history)[:8000]
+                    "prompt": str(chat_history)
                 })
 
             plan_parsed, raw_response = self._call_llm_for_plan(chat_history, instruction, run_id)
@@ -299,7 +302,7 @@ Now generate a JSON output strictly following the MealPlanOutput schema: 3 days,
                     "run_id": run_id, 
                     "agent": self.agent_name, 
                     "phase": "llm_response", 
-                    "response": resp_text[:8000]
+                    "response": resp_text
                 })
 
             # Parse response as dict if needed
@@ -323,8 +326,16 @@ Now generate a JSON output strictly following the MealPlanOutput schema: 3 days,
                 rationale = plan_model.rationale
                 plan_id = generate_id("plan")
                 created_at = utc_now()
+
+                memory.update_run_state(run_id, user_id, stage="approval", status="in_progress", plan_id=plan_id, last_step="generate_plan_step")
+
+                # print(f"Plan JSON: {plan_json}")
+                # print(f"Rationale: {rationale}")
+                # print(f"Plan ID: {plan_id}")
+                # print(f"Created At: {created_at}")
                 
                 memory.save_plan(user_id, plan_id, plan_json, rationale, created_at)
+                print(f"Plan saved to database: {plan_id}")
                 
                 # Log event
                 event = {
@@ -384,11 +395,12 @@ Now generate a JSON output strictly following the MealPlanOutput schema: 3 days,
         self,
         user_id: str,
         plan_id: str,
-        memory: Optional[MemoryLayer] = None
+        memory: Optional[MemoryLayer] = None,
+        run_id: str = None,
     ) -> PlannerResult:
         """Handle plan approval."""
         memory = memory or self.memory
-        run_id = generate_id("run")
+        # run_id = generate_id("run")
         
         try:
             log_event("planner", "plan_approved", {
@@ -416,11 +428,12 @@ Now generate a JSON output strictly following the MealPlanOutput schema: 3 days,
         user_id: str,
         plan_id: str,
         reason: str,
-        memory: Optional[MemoryLayer] = None
+        memory: Optional[MemoryLayer] = None,
+        run_id: str = None,
     ) -> PlannerResult:
         """Handle plan rejection."""
         memory = memory or self.memory
-        run_id = generate_id("run")
+        # run_id = generate_id("run")
         
         try:
             memory.append_rejection(user_id, plan_id, reason)
@@ -444,22 +457,6 @@ Now generate a JSON output strictly following the MealPlanOutput schema: 3 days,
                 error=f"Failed to reject plan: {str(e)}"
             )
 
-    # --------------------------
-    # LEGACY: Keep for CLI compatibility
-    # --------------------------
-    def generate_plan(self, user_id: str, session_text: Optional[str] = None, 
-                     top_k_candidates: int = 50, preferences_override: Optional[Dict[str, Any]] = None,
-                     memory: Optional[MemoryLayer] = None) -> Dict[str, Any]:
-        """
-        LEGACY METHOD for CLI compatibility.
-        For Streamlit, use generate_plan_step() instead.
-        """
-        # This is the old blocking implementation - kept for backwards compatibility
-        # New code should use generate_plan_step()
-        raise NotImplementedError(
-            "Use generate_plan_step() for Streamlit integration. "
-            "This method is deprecated for interactive use."
-        )
 
 
 # ------------------------------

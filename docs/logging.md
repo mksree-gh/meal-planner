@@ -162,10 +162,3 @@ Or create metrics collectors by tailing JSONL files.
 * [ ] Summaries must exist for user profiles and plans
 * [ ] Runtime log should mirror main flow
 * [ ] Keep LLM payloads under 4KB (truncate via `[:4000]`)
-
----
-
-**Version:** Logging v1.0 (2025-10-21)
-```
-
----

@@ -73,21 +73,21 @@ class PreferenceAgent:
         self.primary_model = self.agent_cfg["primary_model"]
         self.fallback_model = self.agent_cfg["fallback_model"]
 
-    def process_user_text(self, user_id: str, user_text: str) -> Dict[str, Any]:
+    def process_user_text(self, user_id: str, user_text: str,run_id: str) -> Dict[str, Any]:
         logger.info(f"🧠 Processing preferences for user={user_id}")
 
-        run_id = generate_id("run")
+        # run_id = generate_id("run")
         base_prompt = self.prompt_path.read_text(encoding="utf-8")
         prompt = f"{base_prompt.strip()}\n\nUser message:\n{user_text.strip()}"
 
         # Log prompt (truncated) to session log for debugging
-        log_session_event({"run_id": run_id, "agent": self.agent_name, "phase": "prompt", "prompt": prompt[:4000]})
+        log_session_event({"run_id": run_id, "agent": self.agent_name, "phase": "prompt", "prompt": prompt})
 
         # Call LLM (primary -> fallback)
-        parsed_raw = self._call_llm(prompt)
+        parsed_raw = self._call_llm(prompt, run_id)
 
         # Log raw LLM response (truncated)
-        log_session_event({"run_id": run_id, "agent": self.agent_name, "phase": "llm_response", "response": safe_json(parsed_raw)[:4000]})
+        log_session_event({"run_id": run_id, "agent": self.agent_name, "phase": "llm_response", "response": safe_json(parsed_raw)})
 
 
         # Validate structured output
@@ -235,7 +235,7 @@ class PreferenceAgent:
         base_prompt = self.prompt_path.read_text(encoding="utf-8")
         return f"{base_prompt.strip()}\n\nUser message:\n{user_text.strip()}"
 
-    def _call_llm(self, prompt: str) -> Dict[str, Any]:
+    def _call_llm(self, prompt: str, run_id) -> Dict[str, Any]:
         # Attempt primary then fallback
         last_exc = None
         for model_name in [self.primary_model, self.fallback_model]:
@@ -278,7 +278,7 @@ class PreferenceAgent:
                 logger.warning("LLM model %s failed: %s", model_name, e)
                 # If fallback also fails, log and re-raise
                 if model_name == self.fallback_model:
-                    run_id = generate_id("run")
+                    # run_id = generate_id("run")
                     log_error(run_id, self.agent_name, "llm_call", str(e))
                     raise
                 # otherwise try next model
@@ -297,6 +297,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     agent = PreferenceAgent()
-    out = agent.process_user_text(user_id=args.user_id, user_text=args.text)
+    out = agent.process_user_text(user_id=args.user_id, user_text=args.text, run_id=args.run_id)
     print("\n✅ Final merged preferences:\n")
     pprint.pp(out)

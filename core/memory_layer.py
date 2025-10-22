@@ -3,7 +3,7 @@
 """
 core/memory_layer.py
 
-SQLite-based memory abstraction for Meal Planning Assistant.
+SQLite-based memory abstraction for the Meal Planner.
 
 Includes:
 - init_db() and seeding helpers
@@ -17,7 +17,7 @@ import threading
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, Optional, List
-
+import ast
 from config import DB_PATH  # project config path
 from core.utils import utc_now
 
@@ -454,24 +454,53 @@ class MemoryLayer:
         Fetch the last paused or failed run, along with related plan and chat context.
         """
         state = self.get_run_state(user_id)
-        if not state or state["status"] not in ("paused", "failed"):
+        print(f"State: {state}")
+        if not state or state["status"] not in ("paused", "failed", "in_progress"):
             return None
 
+        run_id = state.get("run_id")
         plan_id = state.get("current_plan_id")
         plan_data = self.get_plan(plan_id) if plan_id else None
 
         # try to load the last chat history from logs/session_<plan_id>.jsonl
-        chat_log = []
-        if plan_id:
-            log_path = Path(__file__).resolve().parent.parent / "logs" / f"session_{plan_id}.jsonl"
-            if log_path.exists():
-                with open(log_path, "r", encoding="utf-8") as f:
-                    for line in f:
-                        try:
-                            chat_log.append(json.loads(line))
-                        except Exception:
-                            continue
+        # chat_log = []
+        # if plan_id:
+        #     log_path = Path(__file__).resolve().parent.parent / "logs" / f"session_{plan_id}.jsonl"
+        #     print(f"Log path: {log_path}")
+        #     if log_path.exists():
+        #         with open(log_path, "r", encoding="utf-8") as f:
+        #             for line in f:
+        #                 try:
+        #                     chat_log.append(json.loads(line))
+        #                 except Exception:
+        #                     continue
 
+        path = "./logs/session_session.jsonl"
+        latest_prompt = None
+        latest_response = None
+
+        print(run_id)
+        with open(path, "r") as f:
+            for line in f:
+                try:
+                    obj = json.loads(line.strip())
+                except json.JSONDecodeError:
+                    continue
+
+                # Filter for the target run_id
+                
+                if obj.get("run_id") != run_id:
+                    continue
+                if obj.get("phase") == "prompt" and obj.get("agent") == "planner":
+                    latest_prompt = obj.get("prompt")
+                if obj.get("phase") == "llm_response" and obj.get("agent") == "planner":
+                    latest_response = obj.get("response")
+        # print(latest_response)
+        chat_log = ast.literal_eval(latest_prompt)
+        response = json.loads(latest_response).get("reply") 
+        if not response:
+            response = json.loads(latest_response)
+        chat_log.append({"role":"model","parts":[{"text":response}]})
         return {
             "run_state": state,
             "plan_data": plan_data,

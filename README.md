@@ -83,8 +83,8 @@ Excellent points. Here are the specific additions for your README.md file.
 # 🔐 Gemini API key (Required)
 GEMINI_API_KEY="YOUR KEY HERE"
 
-# 🗃️ SQLite DB location (Optional: defaults to posha.db if not set)
-DATABASE_PATH=posha.db
+# 🗃️ SQLite DB location (Optional: defaults to dashboard.db if not set)
+DATABASE_PATH=dashboard.db
 
 # 🌡️ Environment mode (For future use, e.g., 'production')
 ENV=development
@@ -111,7 +111,7 @@ python3 -m core.memory_layer
 ```
 
 ### Using the CLI
-The CLI is the fastest way to interact with Posha.
+The CLI is the fastest way to interact with the Meal Planner.
 ```bash
 # Start a session for a specific user
 python3 main.py --user-id=user_001
