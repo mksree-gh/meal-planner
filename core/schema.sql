@@ -1,6 +1,6 @@
 -- core/schema.sql
 -- ==========================================================
--- Posha Database Schema (v1)
+-- Database Schema (v2)
 -- ==========================================================
 
 PRAGMA foreign_keys = ON;

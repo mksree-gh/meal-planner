@@ -3,7 +3,7 @@
 """
 core/error_handler.py
 
-Centralized error logging and recovery utilities for Posha.
+Centralized error logging and recovery utilities for the meal planner.
 
 Responsibilities:
 - Log structured errors into the SQLite `errors` table

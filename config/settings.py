@@ -3,7 +3,7 @@
 """
 config/settings.py
 
-Central configuration for the Posha Assistant project.
+Central configuration for the Meal Planning Assistant project.
 Defines:
 - Paths (DB, prompts, data)
 - Model configurations per agent
@@ -24,7 +24,7 @@ load_dotenv()
 ROOT = Path(__file__).resolve().parent.parent
 DATA_PATH = ROOT / "data"
 PROMPTS_PATH = ROOT / "prompts"
-DB_PATH = Path(os.getenv("DATABASE_PATH", ROOT / "posha.db"))
+DB_PATH = Path(os.getenv("DATABASE_PATH", ROOT / "dashboard.db"))
 LOG_PATH = ROOT / "logs"
 
 LOG_PATH.mkdir(exist_ok=True)

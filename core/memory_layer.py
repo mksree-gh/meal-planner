@@ -3,7 +3,7 @@
 """
 core/memory_layer.py
 
-SQLite-based memory abstraction for Posha.
+SQLite-based memory abstraction for Meal Planning Assistant.
 
 Includes:
 - init_db() and seeding helpers

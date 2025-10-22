@@ -19,7 +19,7 @@ env/
 # Local config files
 *.sqlite3
 *.db
-posha.db
+dashboard.db
 
 # Logs
 logs/

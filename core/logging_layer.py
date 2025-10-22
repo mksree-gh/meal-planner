@@ -1,7 +1,7 @@
 # core/logging_layer.py
 
 """
-Unified lightweight logging + observability layer for Posha Assistant.
+Unified lightweight logging + observability layer for Meal Planning Assistant.
 Designed for clarity, structure, and easy extensibility.
 """
 

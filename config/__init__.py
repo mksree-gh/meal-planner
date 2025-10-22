@@ -3,7 +3,7 @@
 """
 config package
 
-This module initializes global configuration for the Posha Assistant project.
+This module initializes global configuration for the Meal Planning Assistant project.
 
 It exposes key paths, model configurations, and utility accessors from settings.py.
 """

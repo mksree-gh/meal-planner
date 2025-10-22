@@ -2,7 +2,7 @@
 
 """"
 
-Shared reasoning helpers for Posha.
+Shared reasoning helpers for the meal planner.
 
 Responsibilities:
 - Merge user preference layers: base preferences, adaptive weightages, and session overlays

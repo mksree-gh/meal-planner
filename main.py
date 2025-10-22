@@ -1,13 +1,9 @@
 # main.py
 
 """
-main.py — Posha Assistant Orchestrator
+main.py — 
 
-Coordinates the multi-agent workflow:
-1. PreferenceAgent → parses and updates structured preferences.
-2. PlannerAgent → generates a 3-day meal plan draft.
-3. Human approval → accept or reject plan.
-
+Coordinates the multi-agent workflow
 Implements pause/resume using run_state table in core.memory_layer.
 """
 
@@ -20,8 +16,7 @@ from config import DB_PATH
 from core.memory_layer import MemoryLayer
 from core.error_handler import log_error
 from core.utils import utc_now, generate_id, log_event
-from agents import PreferenceAgent, PlannerAgent
-from agents.planner_intent import PlannerIntentAgent
+from agents import PreferenceAgent, PlannerAgentCLI as PlannerAgent
 
 from typing import Dict, Any
 
@@ -74,7 +69,7 @@ def resume_session(user_id: str, ctx: Dict[str, Any], memory: MemoryLayer):
 def orchestrate(user_id: str, user_text: Optional[str] = None):
     memory = MemoryLayer(DB_PATH)
 
-    print("\n👋 Hello! I am Posha's meal planning assistant.")
+    print("\n👋 Hello! I am your meal planning assistant.")
     print(f"📘 Using database: {DB_PATH}")
 
     # --- STEP 1: Detect unfinished session ---
@@ -103,26 +98,26 @@ def orchestrate(user_id: str, user_text: Optional[str] = None):
             if not user_text:
                 user_text = input("\nEnter a new preference (or press Enter to skip): ").strip() or None
 
-            merged_view = None
-            if user_text:
-                print("\n🧠 Updating preferences...")
-                pref_agent = PreferenceAgent()
-                merged_view = pref_agent.process_user_text(user_id=user_id, user_text=user_text)
-                print("✅ Preferences updated.\n")
-            else:
-                # load existing profile to fill merged_view
-                profile = memory.get_profile(user_id) or {}
-                merged_view = {
-                    "base_preferences": profile.get("preferences_json", {}) or {},
-                    "weightages": profile.get("weightages_json", {}) or {},
-                    "session_overlay": profile.get("session_overlay_json", {}) or {},
-                }
-                print("ℹ️ Using existing preferences.\n")
+            # merged_view = None
+            # if user_text:
+            #     print("\n🧠 Updating preferences...")
+            #     pref_agent = PreferenceAgent()
+            #     merged_view = pref_agent.process_user_text(user_id=user_id, user_text=user_text)
+            #     print("✅ Preferences updated.\n")
+            # else:
+            #     # load existing profile to fill merged_view
+            #     profile = memory.get_profile(user_id) or {}
+            #     merged_view = {
+            #         "base_preferences": profile.get("preferences_json", {}) or {},
+            #         "weightages": profile.get("weightages_json", {}) or {},
+            #         "session_overlay": profile.get("session_overlay_json", {}) or {},
+            #     }
+            #     print("ℹ️ Using existing preferences.\n")
 
             # Generate plan with merged_view passed
             planner = PlannerAgent()
             print("📋 Generating meal plan...")
-            plan_data = planner.generate_plan(user_id=user_id, session_text=user_text, preferences_override=merged_view,memory = memory)
+            plan_data = planner.generate_plan(user_id=user_id, session_text=user_text,memory = memory)
 
             if plan_data == "Exit":
                 return
@@ -140,19 +135,10 @@ def orchestrate(user_id: str, user_text: Optional[str] = None):
         sys.exit(1)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser("Posha Orchestrator CLI")
+    parser = argparse.ArgumentParser("Orchestrator CLI")
     parser.add_argument("--user-id", required=True, help="Unique user ID")
     parser.add_argument("--text", default=None, help="Optional preference text to process directly")
-    parser.add_argument("--chat", default=None, help="(Optional) Conversational follow-up for planner")
 
     args = parser.parse_args()
-
-    if args.chat:
-        planner = PlannerIntentAgent()
-        result = planner.handle_message(args.user_id, args.chat)
-        print(f"\n💬 {result['response']}")
-        if result.get("action") == "regenerate":
-            print("🔁 Plan regenerated.")
-        sys.exit(0)
 
     orchestrate(user_id=args.user_id, user_text=args.text)
