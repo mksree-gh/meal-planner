@@ -6,6 +6,30 @@ A two-agent meal-planning system that remembers evolving user preferences, gener
 
 The Meal Planner follows a **"Planner-Led"** architecture that still adheres to the "One Memory" principle. Agents collaborate by reading from and writing to a shared SQLite database, ensuring they remain decoupled.
 
+```mermaid
+graph TD
+    subgraph "Interaction & Control Flow"
+        User[fa:fa-user User]
+        Entrypoint[/Entrypoint <br/> main.py & streamlit_app.py/]
+        PlannerAgent["fa:fa-cogs PlannerAgent <br/> (Central Controller)"]
+        PreferenceAgent["fa:fa-brain PreferenceAgent <br/> (Specialized Tool)"]
+    end
+
+    subgraph "State Layer"
+        Memory[(fa:fa-database Shared Memory <br/> SQLite)]
+    end
+
+    style Memory fill:#f9f,stroke:#333,stroke-width:2px
+
+    User -- "1. Starts session" --> Entrypoint
+    Entrypoint -- "2. Hands off control" --> PlannerAgent
+    PlannerAgent <--> |"3. Manages Conversation <br> Loop"| User
+    PlannerAgent -- "4a. Reads profile & <br> writes draft plans" --> Memory
+    PlannerAgent -- "4b. If new preferences <br> are detected" --> PreferenceAgent
+    PreferenceAgent -- "5. Reads existing & <br> writes updated profile" --> Memory
+
+```
+
 ### The Core Components
 
 1.  **Shared Memory (SQLite):** The single source of truth for the entire system managed by `core/memory_layer.py`. It stores user profiles, preferences, draft plans, and the system's execution state.
@@ -208,7 +232,7 @@ When the system is waiting for your approval, press `Ctrl+C` on your keyboard.
 **Step 3: Relaunch the application for the same user.**
 Run the exact same command again.
 ```bash
-python main.py --user-id="resume_user_01"
+python3 main.py --user-id="resume_user_01"
 ```
 
 **Expected Output:**
