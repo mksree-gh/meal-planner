@@ -279,11 +279,24 @@ It showcases the complete lifecycle — from adding preferences to generating an
 
 ***
 
-## ⚠️ Limitations & Areas for Improvement
+### ⚠️ Limitations & Future Work
 
-While this project is a robust prototype, several areas could be enhanced in a production environment:
+This project was built with a focus on a solid foundation, and I'm aware of several areas I would improve in a future iteration. Few of them are as follows:
+
+*   **Simplified Preference Logic:** The initial idea for adaptive, time-decaying preference weights was simplified to a more direct update model for stability. A future version could explore more sophisticated logic to better track how a user's tastes evolve over time.
+
+*   **Contradiction Handling:** The system currently trusts all user input. An important next step would be to add a clarification loop, so the agent can ask for confirmation if it receives a contradictory request (like a vegetarian asking for steak).
+
+*   **Static Recipes:** Plans are currently made from a fixed recipe book. A great next feature would be an "ingredient swap" capability, allowing for more dynamic and flexible meal planning. 
+
+*   **Response Latency:** Depending on the model load, there can be a noticeable delay in responses. For a better user experience, I would explore streaming responses or using smaller, specialized models for certain tasks.
+
+*   **API Reliability:** The application can be affected by intermittent network issues (e.g., `[Errno 8]`). A production-ready version would need a more robust retry mechanism to handle these API connection errors gracefully.
+
+*   **Formal Testing:** The project was validated through manual testing. Building a proper suite of unit and integration tests is a critical next step to ensure long-term stability and easier development.
 
 *   **Database Scalability:** SQLite is excellent for this project's scope but would not support high concurrency. A production system would migrate to a database like PostgreSQL.
+
 *   **Advanced Recipe Retrieval:** The Planner currently filters from a small recipe list. For a larger dataset, a semantic search system using vector embeddings would provide more relevant recipe candidates to the LLM.
+
 *   **Stateful Conversation Memory:** The entire chat history is passed to the model on each turn. For longer conversations, this is inefficient. A summarization layer or a more sophisticated state-tracking mechanism would be necessary.
-*   **Testing:** The project lacks a formal testing suite. Adding unit tests for the `core` modules and integration tests for the agent workflows would be a critical next step.
