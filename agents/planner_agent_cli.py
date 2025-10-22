@@ -408,7 +408,7 @@ Now generate a JSON output strictly following the MealPlanOutput schema: 3 days,
                 if feedback_text:
                     print("\n🧠 Updating preferences...")
                     pref_agent = PreferenceAgent()
-                    merged_view = pref_agent.process_user_text(user_id=user_id, user_text=feedback_text)
+                    merged_view = pref_agent.process_user_text(user_id=user_id, user_text=feedback_text, run_id= run_id)
                     print("✅ Preferences updated.\n")
                 else:
                     # load existing profile to fill merged_view

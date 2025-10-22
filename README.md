@@ -2,6 +2,10 @@
 
 A two-agent meal-planning system that remembers evolving user preferences, generates rationalized meal plans, and resumes gracefully after interruptions — all built around a shared SQLite memory.
 
+![Python](https://img.shields.io/badge/python-3.10+-blue)
+![Streamlit](https://img.shields.io/badge/streamlit-app-success)
+![SQLite](https://img.shields.io/badge/database-sqlite-lightgrey)
+
 ## 🏗 Architecture Overview
 
 The Meal Planner follows a **"Planner-Led"** architecture that still adheres to the "One Memory" principle. Agents collaborate by reading from and writing to a shared SQLite database, ensuring they remain decoupled.
@@ -194,6 +198,11 @@ The system will first process this with the **PreferenceAgent**, confirming the 
 Let us know if you like the plan (Enter A), want to request changes (type feedback), press R to reject, or Enter E to exit:
 ```
 
+<p align="center">
+  <img src="assets/gifs/01_add_preferences.gif" width="700"/><br>
+  <em>PlannerAgent generating a plan</em>
+</p>
+
 ---
 
 #### 2. Approving or Rejecting the Plan
@@ -207,11 +216,24 @@ Now that a plan is waiting for feedback, you can test the human-in-the-loop step
     *   **Input:** `The recipes seem a bit boring.`
     *   **Expected Output:** The system will save your feedback and the `PlannerAgent` will loop, using this new context to generate a *different* plan that tries to be more interesting.
 
+<p align="center">
+  <img src="assets/gifs/02_generate_plan.gif" width="700"/><br>
+  <em>PlannerAgent regenerating plan after rejection/feedback</em>
+</p>
+
 ---
 
 #### 3. Resuming a Paused Session
 
-This demonstrates the system's resilience.
+In the Streamlit UI, the **Resume Flow Simulator** lets you intentionally test failures by adjusting an *error probability* slider.  
+When an error occurs, the session state is saved to memory. You can then click **Reload** or **Start Fresh**, and the app automatically restores the last `PlannerAgent` response — resuming exactly where you left off.
+
+<p align="center">
+  <img src="assets/gifs/03_resume_session.gif" width="700"/><br>
+  <em>System detecting paused session and resuming seamlessly</em>
+</p>
+
+This is how this works in CLI:
 
 **Step 1: Start a session and get to the approval prompt.**
 ```bash
@@ -244,6 +266,16 @@ Do you want to resume it? (y/n):
 ```
 
 Enter `y`. The system will restore the session exactly where you left off, presenting the same meal plan and once again asking for your approval. You have successfully resumed without any data loss.
+
+#### CLI Demo
+
+In the CLI demo, the flow runs continuously without manual pauses or UI controls.  
+It showcases the complete lifecycle — from adding preferences to generating and approving a plan — as a single, uninterrupted conversation loop handled entirely by the `PlannerAgent`.
+
+<video src="assets/videos/full_demo.mp4" width="700" controls loop muted></video>
+<br>
+<em>Complete run — preferences → plan generation → feedback → resume</em>
+
 
 ***
 

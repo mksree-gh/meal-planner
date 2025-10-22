@@ -39,9 +39,19 @@ for key, value in default_session_state.items():
 # Title
 st.title("🍽️ Meal Planner")
 
-# Inject custom CSS to center and limit width of main content
+# Custom CSS
 st.markdown("""
     <style>
+    /* Import modern font */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+    
+    /* Global font and sizing */
+    html, body, [class*="css"], .stApp {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 17px;
+        line-height: 1.15;
+    }
+    
     /* Target the main content block */
     .block-container {
         max-width: 1200px;
@@ -57,12 +67,166 @@ st.markdown("""
         padding-right: 2rem;
     }
     
+    /* Main title styling */
+    h1 {
+        font-size: 1.75rem !important;
+        font-weight: 600 !important;
+        margin-bottom: 1.5rem !important;
+        letter-spacing: -0.02em;
+    }
+    
+    /* Chat message headings (##) */
+    .stMarkdown h2 {
+        font-size: 1.25rem !important;
+        font-weight: 600 !important;
+        margin-top: 1.5rem !important;
+        margin-bottom: 0.75rem !important;
+        letter-spacing: -0.01em;
+    }
+    
+    /* Subheadings (###) */
+    .stMarkdown h3 {
+        font-size: 1.05rem !important;
+        font-weight: 500 !important;
+        margin-top: 1rem !important;
+        margin-bottom: 0.5rem !important;
+        color: inherit;
+        opacity: 0.95;
+    }
+    
+    /* Regular paragraph text */
+    .stMarkdown p, .stMarkdown li {
+        font-size: 0.95rem !important;
+        line-height: 1.15 !important;
+        color: inherit;
+        opacity: 0.9;
+        margin-bottom: 0.75rem !important;
+    }
+    
+    /* Bold text */
+    .stMarkdown strong {
+        font-weight: 600;
+        color: inherit;
+        opacity: 1;
+    }
+    
+    /* Code blocks and inline code */
+    .stMarkdown code {
+        font-size: 0.875rem !important;
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 0.15rem 0.4rem;
+        border-radius: 0.25rem;
+        font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+    }
+    
+    /* Lists */
+    .stMarkdown ul, .stMarkdown ol {
+        margin-left: 1.25rem !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    /* Horizontal rules */
+    .stMarkdown hr {
+        margin: 1.5rem 0 !important;
+        border: none !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+    
+    /* Chat message containers */
+    .stChatMessage {
+        padding: 1rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+    
+    /* User message styling */
+    [data-testid="stChatMessageContent"] {
+        font-size: 0.95rem !important;
+    }
+    
+    /* Buttons */
+    .stButton button {
+        font-size: 0.9rem !important;
+        font-weight: 500 !important;
+        padding: 0.5rem 1rem !important;
+        border-radius: 0.5rem !important;
+        transition: all 0.2s ease;
+    }
+    
+    /* Sidebar styling */
+    [data-testid="stSidebar"] {
+        font-size: 0.9rem !important;
+        min-width: 350px !important;
+        max-width: 350px !important;
+    }
+    
+    [data-testid="stSidebar"] > div:first-child {
+        width: 350px !important;
+    }
+    
+    [data-testid="stSidebar"] h2 {
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+    }
+    
+    [data-testid="stSidebar"] .stCaption {
+        font-size: 0.8rem !important;
+        line-height: 1.25 !important;
+    }
+    
+    /* Text input */
+    .stTextInput input {
+        font-size: 0.9rem !important;
+    }
+    
+    /* Chat input */
+    .stChatInput textarea {
+        font-size: 0.95rem !important;
+        line-height: 1.25 !important;
+    }
+    
+    /* Expander */
+    .streamlit-expanderHeader {
+        font-size: 0.95rem !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Divider spacing */
+    hr {
+        margin: 1.15rem 0 !important;
+    }
+    
+    /* Error messages */
+    .stAlert {
+        font-size: 0.9rem !important;
+    }
+    
+    /* Footer caption */
+    .stCaption {
+        font-size: 0.85rem !important;
+        opacity: 0.7 !important;
+    }
+    
     /* Ensure proper spacing on smaller screens */
     @media (max-width: 1400px) {
         .block-container {
             max-width: 100%;
             padding-left: 1rem;
             padding-right: 1rem;
+        }
+    }
+    
+    /* Reduce spacing for mobile */
+    @media (max-width: 768px) {
+        html, body, [class*="css"] {
+            font-size: 14px;
+        }
+        
+        h1 {
+            font-size: 1.5rem !important;
+        }
+        
+        .stMarkdown h2 {
+            font-size: 1.15rem !important;
         }
     }
     </style>
@@ -92,6 +256,20 @@ with st.sidebar:
         st.caption(f"📋 Current Plan: {st.session_state.current_plan_id}")
     
     st.divider()
+
+    if st.button("🗑️ Clear & Start Fresh", use_container_width=True):
+        st.session_state.messages = []
+        st.session_state.chat_history = []
+        st.session_state.session_initialized = False
+        st.session_state.pending_resume = None
+        st.session_state.current_plan_id = None
+        st.session_state.awaiting_action = False
+        st.session_state.preferences_override = None
+        st.session_state.current_plan_json = None
+        # Mark as new session in DB
+        st.rerun()
+
+    st.divider()
     
     # Testing: Random error trigger
     st.subheader("🧪 Testing")
@@ -110,18 +288,43 @@ with st.sidebar:
         st.caption(f"⚠️ {error_chance}% chance of error per message")
     
     st.divider()
+
+    # Info section at bottom
+    with st.expander("ℹ️ How to use Meal Planner", expanded=False):
+        st.markdown("""
+### Getting Started
+
+**1. Share Your Preferences**  
+- Tell me your dietary needs, allergies, and favorite cuisines.
+
+**2. Request a Meal Plan**  
+- Say “Create a meal plan” or be specific (e.g., “Make it low-carb”).
+
+**3. Review & Refine**  
+- ✅ Approve plans you like  
+- ✏️ Request changes or explain what to adjust  
+- ❌ Reject plans to help improve future results  
+
+---
+
+### Features  
+- 🔄 **Resume Anytime** – Pick up where you left off  
+- 🧠 **Smart Learning** – Adapts to your feedback  
+- 📋 **3-Day Plans** – Two personalized meals per day  
+- 💾 **Saved Plans** – Keep approved plans in your profile  
+
+---
+
+### Tips  
+- Be clear about restrictions and dislikes  
+- Mention time limits (e.g., “under 30 minutes”)  
+- Add your cooking skill level for better matches  
+
+        """)
+
+    st.divider()
     
-    if st.button("🗑️ Clear Chat & Start Fresh", use_container_width=True):
-        st.session_state.messages = []
-        st.session_state.chat_history = []
-        st.session_state.session_initialized = False
-        st.session_state.pending_resume = None
-        st.session_state.current_plan_id = None
-        st.session_state.awaiting_action = False
-        st.session_state.preferences_override = None
-        st.session_state.current_plan_json = None
-        # Mark as new session in DB
-        st.rerun()
+    
 
 # Check for unfinished session on first load
 if not st.session_state.session_initialized:
@@ -436,7 +639,7 @@ The session has been paused at stage: **{current_stage}**)
 This is a test error to verify session resume functionality.
 
 **To test resume:**
-1. Refresh the page (F5 or reload)
+1. Refresh the page or click the Clear & Fresh Start button
 2. You should see the resume prompt
 3. Click "Resume Previous Session"
 4. The conversation should continue from this point
@@ -606,40 +809,6 @@ This is a test error to verify session resume functionality.
                     last_step="chat_processing",
                     error_message=str(e)
                 )
-
-# Info section at bottom
-with st.expander("ℹ️ How to use Meal Planner", expanded=False):
-    st.markdown("""
-    ### Getting Started
-    
-    **1. Share Your Preferences**
-    - Tell me about your dietary restrictions (e.g., "I'm vegetarian")
-    - Mention allergies (e.g., "I'm allergic to nuts and shellfish")
-    - Share your favorite cuisines (e.g., "I love Italian and Thai food")
-    
-    **2. Request a Meal Plan**
-    - Simply ask: "Create a meal plan for me"
-    - Or be specific: "I want a low-carb meal plan"
-    
-    **3. Review & Refine**
-    - Approve plans you like with the ✅ button
-    - Request changes by describing what to adjust
-    - Reject plans and explain why for better results
-    
-    ### Features
-    
-    - 🔄 **Session Resume**: If you leave mid-conversation, pick up where you left off
-    - 🧠 **Smart Preferences**: The system learns from your feedback
-    - 📋 **3-Day Plans**: Get 2 meals per day, personalized to your taste
-    - 💾 **Plan History**: All approved plans are saved to your profile
-    
-    ### Tips
-    
-    - Be specific about what you want to avoid
-    - Mention time constraints (e.g., "quick meals under 30 minutes")
-    - Share cooking skill level if relevant
-    - The more details, the better the plan!
-    """)
 
 # Footer
 st.divider()
